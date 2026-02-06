@@ -5,15 +5,20 @@
     --text-muted: #64748b;
     --bg-light: #f8fafc;
     --white: #ffffff;
-    --accent: #ef4444;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-light);
     color: var(--text-main);
-    line-height: 1.5;
-    padding: 40px 20px;
+    line-height: 1.6;
+    padding: 20px;
 }
 
 .container {
@@ -21,10 +26,10 @@ body {
     margin: 0 auto;
 }
 
-/* Header */
 header {
     text-align: center;
     margin-bottom: 40px;
+    padding-top: 20px;
 }
 
 .logo {
@@ -32,7 +37,6 @@ header {
     font-weight: 800;
     font-size: 1.2rem;
     margin-bottom: 15px;
-    letter-spacing: -0.5px;
 }
 
 header h1 {
@@ -46,41 +50,31 @@ header h1 {
 header h1 span { color: var(--primary); }
 .subtitle { color: var(--text-muted); font-size: 1.1rem; }
 
-/* Card Style */
 .calculator-card {
     background: var(--white);
-    padding: 35px;
+    padding: 30px;
     border-radius: 24px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
     border: 1px solid #f1f5f9;
 }
 
-.input-group { margin-bottom: 25px; }
+.input-group { margin-bottom: 20px; }
 
 label {
     display: block;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-size: 0.9rem;
-    color: var(--text-main);
 }
-
-label i { margin-right: 8px; color: var(--primary); }
 
 select, input {
     width: 100%;
-    padding: 14px 18px;
+    display: block;
+    padding: 14px;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
     font-size: 1rem;
-    background-color: #fcfcfd;
-    transition: all 0.2s;
-}
-
-select:focus, input:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    background-color: #ffffff;
 }
 
 button {
@@ -93,59 +87,29 @@ button {
     font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
-    transition: transform 0.1s, background 0.2s;
 }
 
-button:hover { background-color: var(--primary-dark); transform: translateY(-1px); }
-button:active { transform: translateY(0); }
-
-/* Result Box */
-.result-box {
-    margin-top: 30px;
-    padding: 25px;
-    border-radius: 16px;
-    background-color: #f0f7ff;
-    border: 1px solid #e0efff;
-    display: none;
-}
-
-/* Guide Section */
-.section-title { font-size: 1.5rem; margin: 50px 0 20px; font-weight: 800; }
-
-.guide-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 15px;
-}
-
-.guide-card {
+.post-article {
     background: var(--white);
-    padding: 20px;
-    border-radius: 16px;
-    text-decoration: none;
-    color: inherit;
+    padding: 35px 25px;
+    border-radius: 24px;
+    margin-top: 20px;
     border: 1px solid #f1f5f9;
-    transition: all 0.2s;
+    text-align: left;
 }
 
-.guide-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.05); }
-.guide-card i { font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; display: block; }
-.guide-card h3 { font-size: 0.95rem; margin-bottom: 5px; }
-.guide-card p { font-size: 0.8rem; color: var(--text-muted); }
+.post-article h1 { font-size: 1.8rem; margin-bottom: 10px; line-height: 1.3; }
+.post-article .meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #f1f5f9; }
+.post-article h2 { font-size: 1.4rem; margin: 30px 0 15px; color: var(--primary); }
+.post-article p { margin-bottom: 18px; color: #334155; }
+.post-article ul, .post-article ol { margin-left: 20px; margin-bottom: 20px; }
+.post-article li { margin-bottom: 10px; color: #334155; }
 
-/* Footer */
-footer {
-    margin-top: 60px;
-    padding-bottom: 40px;
-    text-align: center;
-    border-top: 1px solid #e2e8f0;
-    padding-top: 30px;
-}
+.guide-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 20px; }
+.guide-card { background: var(--white); padding: 20px; border-radius: 16px; text-decoration: none; color: inherit; border: 1px solid #f1f5f9; }
 
-.footer-links a { margin: 0 12px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
-footer p { margin-top: 15px; color: #94a3b8; font-size: 0.8rem; }
+footer { margin-top: 50px; text-align: center; padding: 30px 0; border-top: 1px solid #e2e8f0; }
 
-/* Responsive */
 @media (max-width: 600px) {
     .guide-grid { grid-template-columns: 1fr; }
     header h1 { font-size: 2rem; }
