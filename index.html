@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Return Master | Smart Shopping Refund Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo"><i class="fa-solid fa-box-archive"></i> US Return Master</div>
+            <h1>Save Your Money, <br><span>Track Your Returns.</span></h1>
+            <p class="subtitle">Get instant return deadlines for 20+ major US retailers.</p>
+        </header>
+
+        <main class="calculator-card">
+            <div class="input-group">
+                <label><i class="fa-solid fa-store"></i> 1. Where did you buy?</label>
+                <select id="store-select">
+                    <option value="">Select a Retailer</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label><i class="fa-solid fa-calendar-check"></i> 2. Purchase Date</label>
+                <input type="date" id="purchase-date" placeholder="mm/dd/yyyy">
+            </div>
+
+            <button id="calc-btn">Get My Deadline <i class="fa-solid fa-arrow-right"></i></button>
+
+            <div id="result-display" class="result-box"></div>
+        </main>
+
+        <section class="info-section">
+            <h2 class="section-title">Expert Shopping Guides</h2>
+            <div class="guide-grid">
+                <a href="post1.html" class="guide-card">
+                    <i class="fa-brands fa-amazon"></i>
+                    <h3>Amazon Returns</h3>
+                    <p>No box? No problem. Here is how.</p>
+                </a>
+                <a href="post2.html" class="guide-card">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <h3>Walmart vs Target</h3>
+                    <p>Which one is better for you?</p>
+                </a>
+                <a href="post3.html" class="guide-card">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <h3>Costco Secrets</h3>
+                    <p>The lifetime return policy guide.</p>
+                </a>
+                <a href="post4.html" class="guide-card">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <h3>Best Buy Fees</h3>
+                    <p>How to avoid restocking charges.</p>
+                </a>
+                <a href="post5.html" class="guide-card">
+                    <i class="fa-solid fa-gift"></i>
+                    <h3>Holiday Extensions</h3>
+                    <p>2026 seasonal return deadlines.</p>
+                </a>
+                 <a href="post6.html" class="guide-card">
+                    <i class="fa-solid fa-receipt"></i>
+                    <h3>No Receipt Returns</h3>
+                    <p>How to return gifts without proof.</p>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-links">
+                <a href="about.html">About</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+            </div>
+            <p>&copy; 2026 US Return Master. Made for smart shoppers.</p>
+        </footer>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
