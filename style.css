@@ -5,20 +5,23 @@
     --text-muted: #64748b;
     --bg-light: #f8fafc;
     --white: #ffffff;
+    --border-color: #e2e8f0;
+    --apple-gray: #f5f5f7; /* Apple-style light gray */
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-font-smoothing: antialiased; /* 글자를 더 매끄럽게 */
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, sans-serif;
     background-color: var(--bg-light);
     color: var(--text-main);
-    line-height: 1.6;
-    padding: 20px;
+    line-height: 1.5;
+    padding: 40px 20px;
 }
 
 .container {
@@ -26,166 +29,205 @@ body {
     margin: 0 auto;
 }
 
+/* Header Section */
 header {
     text-align: center;
-    margin-bottom: 40px;
-    padding-top: 20px;
+    margin-bottom: 50px;
 }
 
 .logo {
     color: var(--primary);
     font-weight: 800;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
 }
 
 header h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     font-weight: 800;
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
     line-height: 1.1;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 header h1 span { color: var(--primary); }
-.subtitle { color: var(--text-muted); font-size: 1.1rem; }
-
-/* --- Added Banner Styling for SEO & Trust --- */
-.banner-container {
-    margin-top: 25px;
-    text-align: center;
-}
+.subtitle { color: var(--text-muted); font-size: 1.2rem; font-weight: 400; }
 
 .retailer-banner {
     max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e2e8f0;
+    margin-top: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
-/* -------------------------------------------- */
 
+/* Calculator Card */
 .calculator-card {
     background: var(--white);
-    padding: 30px;
-    border-radius: 24px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    border: 1px solid #f1f5f9;
+    padding: 40px;
+    border-radius: 32px; /* 더 둥글고 부드럽게 */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.02);
 }
 
-.input-group { margin-bottom: 20px; }
+.input-group { margin-bottom: 25px; }
 
 label {
     display: block;
     font-weight: 600;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
 }
 
 select, input {
     width: 100%;
-    display: block;
-    padding: 14px;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
     font-size: 1rem;
-    background-color: #ffffff;
+    font-family: inherit;
+    background-color: var(--apple-gray);
+    transition: all 0.2s;
+}
+
+select:focus, input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
 button {
     width: 100%;
-    padding: 16px;
+    padding: 18px;
     background-color: var(--primary);
     color: white;
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
     font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
 button:hover {
     background-color: var(--primary-dark);
+    transform: translateY(-1px);
 }
 
+/* Result Box - New Roadmap UI */
 .result-box {
-    margin-top: 20px;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+    display: none; /* 스크립트 실행 전 숨김 */
 }
 
-.info-section {
-    margin-top: 40px;
+.result-header {
+    text-align: center;
+    margin-bottom: 25px;
 }
 
-.section-title {
-    font-size: 1.5rem;
+.result-header h3 {
+    font-size: 1.4rem;
+    color: var(--text-main);
+}
+
+.result-header span {
+    display: block;
+    font-size: 2rem;
+    color: #ef4444; /* 강조색 */
     font-weight: 800;
-    margin-bottom: 20px;
+    margin-top: 5px;
 }
 
-.guide-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 15px; 
-    margin-top: 20px; 
+.refund-roadmap {
+    background-color: var(--apple-gray);
+    padding: 24px;
+    border-radius: 20px;
+    margin-bottom: 25px;
 }
 
-.guide-card { 
-    background: var(--white); 
-    padding: 20px; 
-    border-radius: 16px; 
-    text-decoration: none; 
-    color: inherit; 
-    border: 1px solid #f1f5f9; 
-    transition: transform 0.2s, box-shadow 0.2s;
+.refund-roadmap h4 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.guide-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+.path-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
 }
 
-.guide-card i {
-    font-size: 1.5rem;
+.path-item {
+    background: white;
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+}
+
+.path-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.path-date {
+    font-weight: 700;
     color: var(--primary);
-    margin-bottom: 10px;
+    font-size: 0.95rem;
 }
 
-.guide-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-}
-
-.guide-card p {
+.policy-details {
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: var(--text-main);
+    padding: 0 10px;
 }
 
-footer { 
-    margin-top: 50px; 
-    text-align: center; 
-    padding: 30px 0; 
-    border-top: 1px solid #e2e8f0; 
-}
+.policy-details p { margin-bottom: 8px; }
 
-.footer-links {
-    margin-bottom: 10px;
-}
-
-.footer-links a {
-    text-decoration: none;
-    color: var(--text-muted);
-    margin: 0 10px;
+.pro-tip-box {
+    margin-top: 20px;
+    padding: 16px;
+    background-color: #eff6ff;
+    border-radius: 14px;
+    color: var(--primary-dark);
     font-size: 0.9rem;
+    border-left: 4px solid var(--primary);
 }
 
-footer p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
+/* Guide Section */
+.info-section { margin-top: 60px; }
+.section-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 25px; letter-spacing: -0.5px; }
+
+.guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.guide-card { 
+    background: var(--white); padding: 25px; border-radius: 24px; text-decoration: none; color: inherit; 
+    border: 1px solid rgba(0,0,0,0.03); box-shadow: 0 4px 12px rgba(0,0,0,0.02); transition: all 0.3s;
 }
+
+.guide-card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,0.06); }
+.guide-card i { font-size: 1.8rem; color: var(--primary); margin-bottom: 15px; }
+.guide-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.guide-card p { font-size: 0.9rem; color: var(--text-muted); }
+
+/* Footer */
+footer { margin-top: 80px; padding: 40px 0; border-top: 1px solid var(--border-color); text-align: center; }
+.footer-links { margin-bottom: 15px; }
+.footer-links a { color: var(--text-muted); text-decoration: none; margin: 0 12px; font-size: 0.9rem; font-weight: 500; }
+footer p { font-size: 0.85rem; color: var(--text-muted); opacity: 0.8; }
 
 @media (max-width: 600px) {
+    .path-container { grid-template-columns: 1fr; }
+    header h1 { font-size: 2.2rem; }
+    .calculator-card { padding: 30px 20px; }
     .guide-grid { grid-template-columns: 1fr; }
-    header h1 { font-size: 2rem; }
-    .container { padding: 0 10px; }
 }
