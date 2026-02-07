@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://checkreturndate.com/</loc></url>
-  <url><loc>https://checkreturndate.com/about.html</loc></url>
-  <url><loc>https://checkreturndate.com/post1.html</loc></url>
-  <url><loc>https://checkreturndate.com/post2.html</loc></url>
-  <url><loc>https://checkreturndate.com/post3.html</loc></url>
-  <url><loc>https://checkreturndate.com/post4.html</loc></url>
-  <url><loc>https://checkreturndate.com/post5.html</loc></url>
-  <url><loc>https://checkreturndate.com/post6.html</loc></url>
+  <url><loc>https://checkreturndate.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://checkreturndate.com/about.html</loc><priority>0.5</priority></url>
+  <url><loc>https://checkreturndate.com/privacy.html</loc><priority>0.3</priority></url>
+  <url><loc>https://checkreturndate.com/terms.html</loc><priority>0.3</priority></url>
+
+  <url><loc>https://checkreturndate.com/post1.html</loc><priority>0.8</priority></url>
+  <url><loc>https://checkreturndate.com/post2.html</loc><priority>0.8</priority></url>
+  <url><loc>https://checkreturndate.com/post3.html</loc><priority>0.8</priority></url>
+  <url><loc>https://checkreturndate.com/post4.html</loc><priority>0.8</priority></url>
+  <url><loc>https://checkreturndate.com/post5.html</loc><priority>0.8</priority></url>
+  <url><loc>https://checkreturndate.com/post6.html</loc><priority>0.8</priority></url>
+  <url><loc>https://checkreturndate.com/post7.html</loc><priority>0.8</priority></url>
+
+  <url><loc>https://checkreturndate.com/amazon.html</loc><priority>0.9</priority></url>
+  <url><loc>https://checkreturndate.com/walmart.html</loc><priority>0.9</priority></url>
+  <url><loc>https://checkreturndate.com/target.html</loc><priority>0.9</priority></url>
+  <url><loc>https://checkreturndate.com/costco.html</loc><priority>0.9</priority></url>
+  <url><loc>https://checkreturndate.com/apple.html</loc><priority>0.9</priority></url>
+  <url><loc>https://checkreturndate.com/bestbuy.html</loc><priority>0.9</priority></url>
+
+  <url><loc>https://checkreturndate.com/ebay.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/homedepot.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/lowes.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/wayfair.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/nike.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/lululemon.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/zara.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/hm.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/shein.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/sephora.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/ultabeauty.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/nordstrom.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/gap.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/macys.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/tjmaxx.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/chewy.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/petco.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/cvs.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/walgreens.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/kohls.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/temu.html</loc><priority>0.6</priority></url>
+  <url><loc>https://checkreturndate.com/ross.html</loc><priority>0.6</priority></url>
 </urlset>
