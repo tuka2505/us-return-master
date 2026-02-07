@@ -231,3 +231,42 @@ footer p { font-size: 0.85rem; color: var(--text-muted); opacity: 0.8; }
     .calculator-card { padding: 30px 20px; }
     .guide-grid { grid-template-columns: 1fr; }
 }
+
+/* Store Index Styling - Apple Minimalist Style */
+.store-index {
+    margin-top: 60px;
+    padding: 30px 10px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.index-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.index-links {
+    line-height: 2.2;
+    color: var(--border-color); /* Separator color */
+    font-size: 0.85rem;
+}
+
+.index-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: color 0.2s;
+    margin: 0 4px;
+}
+
+.index-links a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .index-links { line-height: 2.5; }
+}
