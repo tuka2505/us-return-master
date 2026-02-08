@@ -1,5 +1,5 @@
 /**
- * US Return Master - Retailer Database (32 Major Retailers)
+ * US Return Master - Retailer Database (SEO Optimized)
  * Last Updated: February 2026
  */
 
@@ -7,6 +7,7 @@ const RETURN_DATA = [
     // 1. General & Marketplace
     {
         id: "amazon",
+        slug: "amazon-return-policy", // SEO Optimized URL
         name: "Amazon",
         standardDays: 30,
         refundInStore: "2-3 Days (Drop-off)",
@@ -17,6 +18,7 @@ const RETURN_DATA = [
     },
     {
         id: "walmart",
+        slug: "walmart-return-policy",
         name: "Walmart",
         standardDays: 90,
         refundInStore: "Immediate to 24 Hours",
@@ -27,6 +29,7 @@ const RETURN_DATA = [
     },
     {
         id: "target",
+        slug: "target-return-policy",
         name: "Target",
         standardDays: 90,
         refundInStore: "Immediate to 24 Hours",
@@ -37,6 +40,7 @@ const RETURN_DATA = [
     },
     {
         id: "ebay",
+        slug: "ebay-return-policy",
         name: "eBay",
         standardDays: 30,
         refundInStore: "N/A",
@@ -47,6 +51,7 @@ const RETURN_DATA = [
     },
     {
         id: "costco",
+        slug: "costco-return-policy",
         name: "Costco",
         standardDays: 365,
         refundInStore: "Immediate",
@@ -57,6 +62,7 @@ const RETURN_DATA = [
     },
     {
         id: "temu",
+        slug: "temu-return-policy",
         name: "Temu",
         standardDays: 90,
         refundInStore: "N/A",
@@ -69,6 +75,7 @@ const RETURN_DATA = [
     // 2. Electronics & Home
     {
         id: "apple",
+        slug: "apple-return-policy",
         name: "Apple Store",
         standardDays: 14,
         refundInStore: "5-7 Business Days",
@@ -79,6 +86,7 @@ const RETURN_DATA = [
     },
     {
         id: "bestbuy",
+        slug: "best-buy-return-policy",
         name: "Best Buy",
         standardDays: 14,
         refundInStore: "Immediate",
@@ -89,6 +97,7 @@ const RETURN_DATA = [
     },
     {
         id: "homedepot",
+        slug: "home-depot-return-policy",
         name: "Home Depot",
         standardDays: 90,
         refundInStore: "Immediate (Cash/Card)",
@@ -99,6 +108,7 @@ const RETURN_DATA = [
     },
     {
         id: "lowes",
+        slug: "lowes-return-policy",
         name: "Lowe's",
         standardDays: 90,
         refundInStore: "Immediate",
@@ -109,6 +119,7 @@ const RETURN_DATA = [
     },
     {
         id: "wayfair",
+        slug: "wayfair-return-policy",
         name: "Wayfair",
         standardDays: 30,
         refundInStore: "N/A",
@@ -121,6 +132,7 @@ const RETURN_DATA = [
     // 3. Apparel & Beauty
     {
         id: "nike",
+        slug: "nike-return-policy",
         name: "Nike",
         standardDays: 60,
         refundInStore: "Immediate",
@@ -131,6 +143,7 @@ const RETURN_DATA = [
     },
     {
         id: "lululemon",
+        slug: "lululemon-return-policy",
         name: "Lululemon",
         standardDays: 30,
         refundInStore: "3-5 Business Days",
@@ -141,6 +154,7 @@ const RETURN_DATA = [
     },
     {
         id: "zara",
+        slug: "zara-return-policy",
         name: "Zara",
         standardDays: 30,
         refundInStore: "Immediate",
@@ -151,6 +165,7 @@ const RETURN_DATA = [
     },
     {
         id: "hm",
+        slug: "hm-return-policy",
         name: "H&M",
         standardDays: 30,
         refundInStore: "Immediate",
@@ -161,6 +176,7 @@ const RETURN_DATA = [
     },
     {
         id: "shein",
+        slug: "shein-return-policy",
         name: "Shein",
         standardDays: 35,
         refundInStore: "N/A",
@@ -171,6 +187,7 @@ const RETURN_DATA = [
     },
     {
         id: "sephora",
+        slug: "sephora-return-policy",
         name: "Sephora",
         standardDays: 30,
         refundInStore: "Immediate",
@@ -181,6 +198,7 @@ const RETURN_DATA = [
     },
     {
         id: "ultabeauty",
+        slug: "ulta-beauty-return-policy",
         name: "Ulta Beauty",
         standardDays: 60,
         refundInStore: "Immediate",
@@ -191,6 +209,7 @@ const RETURN_DATA = [
     },
     {
         id: "nordstrom",
+        slug: "nordstrom-return-policy",
         name: "Nordstrom",
         standardDays: 0,
         refundInStore: "3-5 Business Days",
@@ -201,6 +220,7 @@ const RETURN_DATA = [
     },
     {
         id: "gap",
+        slug: "gap-return-policy",
         name: "Gap / Old Navy",
         standardDays: 30,
         refundInStore: "Immediate",
@@ -211,6 +231,7 @@ const RETURN_DATA = [
     },
     {
         id: "macys",
+        slug: "macys-return-policy",
         name: "Macy's",
         standardDays: 30,
         refundInStore: "Immediate",
@@ -221,6 +242,7 @@ const RETURN_DATA = [
     },
     {
         id: "tjmaxx",
+        slug: "tj-maxx-return-policy",
         name: "TJ Maxx",
         standardDays: 30,
         refundInStore: "Immediate",
@@ -233,6 +255,7 @@ const RETURN_DATA = [
     // 4. Pet & Health
     {
         id: "chewy",
+        slug: "chewy-return-policy",
         name: "Chewy",
         standardDays: 365,
         refundInStore: "N/A",
@@ -243,6 +266,7 @@ const RETURN_DATA = [
     },
     {
         id: "petco",
+        slug: "petco-return-policy",
         name: "Petco",
         standardDays: 30,
         refundInStore: "Immediate",
@@ -253,6 +277,7 @@ const RETURN_DATA = [
     },
     {
         id: "cvs",
+        slug: "cvs-return-policy",
         name: "CVS",
         standardDays: 60,
         refundInStore: "Immediate",
@@ -263,6 +288,7 @@ const RETURN_DATA = [
     },
     {
         id: "walgreens",
+        slug: "walgreens-return-policy",
         name: "Walgreens",
         standardDays: 30,
         refundInStore: "Immediate",

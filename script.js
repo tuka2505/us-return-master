@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (daysStr.toLowerCase().includes("immediate")) return "Instant / Today";
 
         const today = new Date();
-        // 숫자만 추출 (예: "7-10 Days" -> [7, 10])
         const dayRange = daysStr.match(/\d+/g);
         
         if (dayRange) {
@@ -36,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             return `${formatDate(minDate)} ~ ${formatDate(maxDate)}`;
         }
-        return daysStr; // 숫자가 없는 특이 케이스는 문자열 그대로 출력
+        return daysStr;
     };
 
     // 3. 계산 버튼 클릭 이벤트
@@ -88,6 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             <div class="pro-tip-box">
                 <strong><i class="fa-solid fa-lightbulb"></i> Expert Tip:</strong> ${store.tip}
+            </div>
+
+            <div style="margin-top: 25px; text-align: center;">
+                <a href="${store.slug}.html" class="calc-btn" style="display: inline-block; text-decoration: none; background: #000; color: #fff; padding: 12px 25px; border-radius: 8px; font-weight: 600; font-size: 0.9rem;">
+                    View Full ${store.name} Policy Guide <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
+                </a>
             </div>
         `;
         
