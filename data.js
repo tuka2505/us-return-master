@@ -251,6 +251,72 @@ const RETURN_DATA = [
         holiday: "Purchases Oct 5 - Dec 24 can be returned through Jan 25, 2026.",
         tip: "Online orders can be returned to any TJ Maxx store to avoid the $11.99 mail fee."
     },
+    {
+        id: "kohls",
+        slug: "kohls-return-policy",
+        name: "Kohl's",
+        standardDays: 180,
+        refundInStore: "Immediate to 24 Hours",
+        refundByMail: "7-10 Business Days",
+        exceptions: "Electronics (30 days). Sephora at Kohl's items typically have shorter windows.",
+        holiday: "Holiday return windows are extended; check the printed date on your receipt.",
+        tip: "Kohl's Rewards and digital receipts make no-receipt returns much smoother."
+    },
+    {
+        id: "ross",
+        slug: "ross-return-policy",
+        name: "Ross Dress for Less",
+        standardDays: 30,
+        refundInStore: "Immediate",
+        refundByMail: "N/A",
+        exceptions: "Original receipt required for a full refund; otherwise store credit only.",
+        holiday: "Holiday extensions vary by store; ask at checkout for the final date.",
+        tip: "Keep tags attached and bring the original receipt to speed up refunds."
+    },
+    {
+        id: "marshalls",
+        slug: "marshalls-return-policy",
+        name: "Marshalls",
+        standardDays: 30,
+        refundInStore: "Immediate",
+        refundByMail: "10-14 Business Days",
+        exceptions: "Receipts after 30 days usually get store credit; online orders have a longer window.",
+        holiday: "Holiday extensions are typically posted in-store and online each season.",
+        tip: "Return online purchases in-store to avoid shipping fees."
+    },
+    {
+        id: "homegoods",
+        slug: "homegoods-return-policy",
+        name: "HomeGoods",
+        standardDays: 30,
+        refundInStore: "Immediate",
+        refundByMail: "N/A",
+        exceptions: "No receipt returns are usually issued as store credit at the current price.",
+        holiday: "Holiday return dates can extend into late January; confirm at checkout.",
+        tip: "Large decor items are easiest to return in the same store they were purchased."
+    },
+    {
+        id: "dicks",
+        slug: "dicks-return-policy",
+        name: "Dick's Sporting Goods",
+        standardDays: 60,
+        refundInStore: "Immediate to 24 Hours",
+        refundByMail: "7-14 Business Days",
+        exceptions: "Electronics and select items may have shorter windows or restocking fees.",
+        holiday: "Holiday extensions vary by season; look for the posted deadline on receipts.",
+        tip: "Use ScoreCard for easy receipt lookup and faster returns."
+    },
+    {
+        id: "ikea",
+        slug: "ikea-return-policy",
+        name: "IKEA",
+        standardDays: 180,
+        refundInStore: "Immediate to 24 Hours",
+        refundByMail: "7-14 Business Days",
+        exceptions: "Opened items typically have a shorter window; mattresses and special orders vary.",
+        holiday: "Standard policy applies unless a seasonal extension is posted.",
+        tip: "Keep the packaging and receipt to avoid return delays at the service desk."
+    },
 
     // 4. Pet & Health
     {
