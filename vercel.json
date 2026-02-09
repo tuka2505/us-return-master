@@ -1,0 +1,34 @@
+{
+  "redirects": [
+    {
+      "source": "/post1.html",
+      "destination": "/amazon-return-policy-no-box-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/post2.html",
+      "destination": "/walmart-vs-target-return-comparison.html",
+      "permanent": true
+    },
+    {
+      "source": "/post3.html",
+      "destination": "/costco-return-policy-secrets.html",
+      "permanent": true
+    },
+    {
+      "source": "/post4.html",
+      "destination": "/best-buy-restocking-fees-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/post5.html",
+      "destination": "/holiday-return-deadline-2026.html",
+      "permanent": true
+    },
+    {
+      "source": "/post6.html",
+      "destination": "/return-without-receipt-guide.html",
+      "permanent": true
+    }
+  ]
+}
