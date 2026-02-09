@@ -7,6 +7,7 @@
     { "source": "/post3(.*)", "destination": "/costco-return-policy-secrets", "permanent": true },
     { "source": "/post4(.*)", "destination": "/best-buy-restocking-fees-guide", "permanent": true },
     { "source": "/post5(.*)", "destination": "/holiday-return-deadline-2026", "permanent": true },
-    { "source": "/post6(.*)", "destination": "/return-without-receipt-guide", "permanent": true }
+    { "source": "/post6(.*)", "destination": "/return-without-receipt-guide", "permanent": true },
+    { "source": "/(apple|nike|walmart|target|costco|cvs|best-buy|ebay|gap|hm|kohls|lowes|lululemon|macys|marshalls|nordstrom|petco|ross|sephora|shein|temu|walgreens|wayfair|zara)", "destination": "/$1-return-policy", "permanent": true }
   ]
 }
