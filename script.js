@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
 
             <div style="margin-top: 25px; text-align: center;">
-                <a href="${store.slug}.html" class="calc-btn" style="display: inline-block; text-decoration: none; background: #000; color: #fff; padding: 12px 25px; border-radius: 8px; font-weight: 600; font-size: 0.9rem;">
+                <a href="${store.slug}" class="calc-btn" style="display: inline-block; text-decoration: none; background: #000; color: #fff; padding: 12px 25px; border-radius: 8px; font-weight: 600; font-size: 0.9rem;">
                     View Full ${store.name} Policy Guide <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
                 </a>
             </div>
