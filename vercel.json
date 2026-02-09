@@ -2,12 +2,11 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/post1.html", "destination": "/amazon-return-policy-no-box-guide", "permanent": true },
-    { "source": "/post2.html", "destination": "/walmart-vs-target-return-comparison", "permanent": true },
-    { "source": "/post3.html", "destination": "/costco-return-policy-secrets", "permanent": true },
-    { "source": "/post4.html", "destination": "/best-buy-restocking-fees-guide", "permanent": true },
-    { "source": "/post5.html", "destination": "/holiday-return-deadline-2026", "permanent": true },
-    { "source": "/post6.html", "destination": "/return-without-receipt-guide", "permanent": true },
-    { "source": "/about.html", "destination": "/about", "permanent": true }
+    { "source": "/post1(.*)", "destination": "/amazon-return-policy-no-box-guide", "permanent": true },
+    { "source": "/post2(.*)", "destination": "/walmart-vs-target-return-comparison", "permanent": true },
+    { "source": "/post3(.*)", "destination": "/costco-return-policy-secrets", "permanent": true },
+    { "source": "/post4(.*)", "destination": "/best-buy-restocking-fees-guide", "permanent": true },
+    { "source": "/post5(.*)", "destination": "/holiday-return-deadline-2026", "permanent": true },
+    { "source": "/post6(.*)", "destination": "/return-without-receipt-guide", "permanent": true }
   ]
 }
