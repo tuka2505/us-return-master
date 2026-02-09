@@ -1,7 +1,47 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/:path*.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, proxy-revalidate" },
+        { "key": "Pragma", "value": "no-cache" },
+        { "key": "Expires", "value": "0" }
+      ]
+    }
+  ],
   "redirects": [
+    {
+      "source": "/post1",
+      "destination": "/amazon-return-policy-no-box-guide",
+      "permanent": true
+    },
+    {
+      "source": "/post2",
+      "destination": "/walmart-vs-target-return-comparison",
+      "permanent": true
+    },
+    {
+      "source": "/post3",
+      "destination": "/costco-return-policy-secrets",
+      "permanent": true
+    },
+    {
+      "source": "/post4",
+      "destination": "/best-buy-restocking-fees-guide",
+      "permanent": true
+    },
+    {
+      "source": "/post5",
+      "destination": "/holiday-return-deadline-2026",
+      "permanent": true
+    },
+    {
+      "source": "/post6",
+      "destination": "/return-without-receipt-guide",
+      "permanent": true
+    },
     {
       "source": "/post1.html",
       "destination": "/amazon-return-policy-no-box-guide",
