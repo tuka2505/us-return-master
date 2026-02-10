@@ -74,18 +74,22 @@
             <button id="calculate-btn" disabled style="opacity: 0.5; cursor: not-allowed;">Check Return Date <i class="fa-solid fa-arrow-right"></i></button>
             
             <div id="result-display" class="result-box hidden" style="display:none;">
-                <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px;">
-                    <span id="res-icon" style="font-size:1.5rem;">📅</span>
-                    <h3 id="res-title" style="margin:0;">Return Deadline</h3>
-                </div>
-                <div class="result-body">
-                    <p id="res-date" class="highlight-date" style="font-size:2rem; font-weight:800; color:#2c3e50; margin:10px 0;">--/--/----</p>
-                    <p id="res-days-left" class="days-count" style="font-weight:600; font-size:1.2rem;">Calculating...</p>
-                    
-                    <div class="policy-details" style="background:#f1f3f5; padding:15px; border-radius:8px; margin-top:20px; text-align:left; font-size:0.95rem;">
-                        <p style="margin:8px 0;"><strong style="color:#333;">📝 Policy:</strong> <span id="res-policy"></span></p>
-                        <p style="margin:8px 0;"><strong style="color:#333;">💡 Pro Tip:</strong> <span id="res-tip"></span></p>
-                        <p style="margin:8px 0;"><strong style="color:#333;">📦 Refund:</strong> <span id="res-refund"></span></p>
+                <div class="result-grid">
+                    <div class="result-card">
+                        <p class="result-label">Remaining Days</p>
+                        <p id="res-days-message" class="result-value">You have -- days left!</p>
+                    </div>
+                    <div class="result-card">
+                        <p class="result-label">Final Deadline</p>
+                        <p id="res-deadline-date" class="result-value">--</p>
+                    </div>
+                    <div class="result-card">
+                        <p class="result-label">Refund Timeline</p>
+                        <p class="result-value">If you return today, expected refund by: <span id="res-refund-date">--</span></p>
+                    </div>
+                    <div class="result-card">
+                        <p class="result-label">Policy &amp; Method</p>
+                        <p class="result-value"><span id="res-policy-name">--</span> · <span id="res-refund-method">--</span></p>
                     </div>
                 </div>
             </div>

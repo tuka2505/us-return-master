@@ -20,11 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const suggestionsBox = document.getElementById('search-suggestions');
 
     // Result Elements
-    const resDate = document.getElementById('res-date');
-    const resDaysLeft = document.getElementById('res-days-left');
-    const resPolicy = document.getElementById('res-policy');
-    const resTip = document.getElementById('res-tip');
-    const resRefund = document.getElementById('res-refund');
+    const resDaysMessage = document.getElementById('res-days-message');
+    const resDeadlineDate = document.getElementById('res-deadline-date');
+    const resRefundDate = document.getElementById('res-refund-date');
+    const resPolicyName = document.getElementById('res-policy-name');
+    const resRefundMethod = document.getElementById('res-refund-method');
 
     let selectedBrandData = null;
 
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper: Format day text for dropdown
     function formatDays(days) {
-        if (days === 999) return "Lifetime";
+        if (days >= 9999) return "Lifetime";
         if (days === 0) return "Final Sale";
         if (days === -1) return "Case-by-case";
         return `${days} Days`;
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const days = category.days;
 
         // 1. Handle Special Cases (Lifetime / Final Sale)
-        if (days === 999) {
+        if (days >= 9999) {
             displayResult("No Deadline (Lifetime)", "Forever", category);
             return;
         }
@@ -337,41 +337,62 @@ document.addEventListener('DOMContentLoaded', () => {
         const diffTime = deadline - today;
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        displayResult(deadline.toDateString(), diffDays, category);
+        displayResult(deadline, diffDays, category);
     }
 
     // ============================================
     // 5. Display Results
     // ============================================
-    function displayResult(dateText, daysLeft, category) {
+    function displayResult(deadlineDate, daysLeft, category) {
         resultBox.classList.remove('hidden');
         resultBox.style.display = 'block';
-        
-        // Date Display
-        resDate.textContent = dateText;
 
-        // Days Left Logic
-        if (typeof daysLeft === 'number') {
-            if (daysLeft < 0) {
-                resDaysLeft.textContent = `❌ Expired ${Math.abs(daysLeft)} days ago`;
-                resDaysLeft.style.color = "red";
-            } else if (daysLeft === 0) {
-                resDaysLeft.textContent = "⚠️ Return by TODAY!";
-                resDaysLeft.style.color = "orange";
-            } else {
-                resDaysLeft.textContent = `⏳ ${daysLeft} days left`;
-                resDaysLeft.style.color = "#2ecc71";
-            }
+        // Remaining Days
+        if (daysLeft < 0) {
+            resDaysMessage.textContent = `Return window closed (${Math.abs(daysLeft)} days ago)`;
+            resDaysMessage.style.color = "#ef4444";
+        } else if (daysLeft === 0) {
+            resDaysMessage.textContent = "You have 0 days left!";
+            resDaysMessage.style.color = "#ef4444";
+        } else if (daysLeft <= 3) {
+            resDaysMessage.textContent = `You have ${daysLeft} days left!`;
+            resDaysMessage.style.color = "#ef4444";
         } else {
-            // Lifetime or Final Sale text
-            resDaysLeft.textContent = daysLeft; 
-            resDaysLeft.style.color = daysLeft === "Final Sale" ? "red" : "blue";
+            resDaysMessage.textContent = `You have ${daysLeft} days left!`;
+            resDaysMessage.style.color = "#16a34a";
         }
 
-        // Details
-        resPolicy.textContent = `${category.name} (${formatDays(category.days)})`;
-        resTip.textContent = category.tip || selectedBrandData.tip || "No specific tip available.";
-        resRefund.textContent = `Store: ${selectedBrandData.refundInfo.inStore} | Mail: ${selectedBrandData.refundInfo.byMail}`;
+        // Final Deadline
+        resDeadlineDate.textContent = deadlineDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        // Refund Timeline: today + 5 business days
+        const refundDate = addBusinessDays(new Date(), 5);
+        resRefundDate.textContent = refundDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        // Policy & Method
+        resPolicyName.textContent = `${category.name} (${formatDays(category.days)})`;
+        resRefundMethod.textContent = selectedBrandData.refund_method || "Original Payment";
+    }
+
+    function addBusinessDays(startDate, daysToAdd) {
+        const date = new Date(startDate);
+        let added = 0;
+        while (added < daysToAdd) {
+            date.setDate(date.getDate() + 1);
+            const day = date.getDay();
+            if (day !== 0 && day !== 6) {
+                added += 1;
+            }
+        }
+        return date;
     }
 
     // Run Initialization
