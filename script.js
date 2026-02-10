@@ -12,10 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoryGroup = document.getElementById('category-group');
     const categorySelect = document.getElementById('category-select');
     const categoryHelper = document.getElementById('category-helper');
+    const categoryInfo = document.getElementById('category-info');
     const dateInput = document.getElementById('purchase-date');
     const calcBtn = document.getElementById('calculate-btn');
     const resultBox = document.getElementById('result-display');
     const retailerGrid = document.getElementById('retailer-grid');
+    const suggestionsBox = document.getElementById('search-suggestions');
 
     // Result Elements
     const resDate = document.getElementById('res-date');
@@ -34,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dateInput.valueAsDate = new Date();
         populateBrandOptions(RETURN_DATA);
         renderRetailerGrid(RETURN_DATA);
+        checkInputs();
     }
 
     function renderRetailerGrid(data) {
@@ -107,17 +110,47 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Search & Filter Logic
     // ============================================
     brandSearch.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
+        const query = e.target.value.trim().toLowerCase();
+        if (!query) {
+            clearBrandSelection();
+            renderSuggestions([]);
+            return;
+        }
+
         const filtered = RETURN_DATA.filter(brand => 
             brand.name.toLowerCase().includes(query)
         );
-        
-        populateBrandOptions(filtered);
-        
-        // Auto-select if only one match
-        if (filtered.length === 1) {
-            brandSelect.value = filtered[0].id;
-            handleBrandChange(filtered[0].id);
+
+        renderSuggestions(filtered);
+
+        const exactMatch = RETURN_DATA.find(
+            brand => brand.name.toLowerCase() === query
+        );
+
+        if (exactMatch) {
+            selectBrand(exactMatch);
+        } else {
+            brandSelect.value = '';
+            selectedBrandData = null;
+            categoryGroup.style.display = 'none';
+            categorySelect.innerHTML = '<option value="" disabled selected>Select Item Category...</option>';
+            categoryHelper.textContent = '';
+            checkInputs();
+        }
+    });
+
+    brandSearch.addEventListener('focus', () => {
+        const query = brandSearch.value.trim().toLowerCase();
+        if (!query) return;
+        const filtered = RETURN_DATA.filter(brand =>
+            brand.name.toLowerCase().includes(query)
+        );
+        renderSuggestions(filtered);
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('.search-group')) {
+            renderSuggestions([]);
         }
     });
 
@@ -131,12 +164,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleBrandChange(brandId) {
         selectedBrandData = RETURN_DATA.find(b => b.id === brandId);
         
-        if (!selectedBrandData) return;
+        if (!selectedBrandData) {
+            checkInputs();
+            return;
+        }
 
         // Reset & Show Category Section
         categorySelect.innerHTML = '<option value="" disabled selected>Select Item Category...</option>';
         categoryGroup.style.display = 'block';
         categoryHelper.textContent = '';
+        if (categoryInfo) {
+            categoryInfo.textContent = '';
+            categoryInfo.style.display = 'none';
+        }
         resultBox.classList.add('hidden'); // Hide previous results
 
         // Populate Categories
@@ -145,6 +185,62 @@ document.addEventListener('DOMContentLoaded', () => {
             option.value = index; // Use index to retrieve data later
             option.textContent = `${cat.label} (${formatDays(cat.days)})`;
             categorySelect.appendChild(option);
+        });
+
+        const fallbackOption = document.createElement('option');
+        fallbackOption.value = 'not-sure';
+        fallbackOption.textContent = 'I\'m not sure / Other categories';
+        categorySelect.appendChild(fallbackOption);
+
+        checkInputs();
+    }
+
+    function renderSuggestions(matches) {
+        if (!suggestionsBox) return;
+
+        if (!matches.length) {
+            suggestionsBox.innerHTML = '';
+            suggestionsBox.style.display = 'none';
+            return;
+        }
+
+        suggestionsBox.innerHTML = matches
+            .slice(0, 8)
+            .map(match =>
+                `<div class="suggestion-item" data-id="${match.id}">${match.name}</div>`
+            )
+            .join('');
+        suggestionsBox.style.display = 'block';
+    }
+
+    function selectBrand(brand) {
+        brandSearch.value = brand.name;
+        brandSelect.value = brand.id;
+        renderSuggestions([]);
+        handleBrandChange(brand.id);
+    }
+
+    function clearBrandSelection() {
+        brandSelect.value = '';
+        selectedBrandData = null;
+        categoryGroup.style.display = 'none';
+        categorySelect.innerHTML = '<option value="" disabled selected>Select Item Category...</option>';
+        categoryHelper.textContent = '';
+        if (categoryInfo) {
+            categoryInfo.textContent = '';
+            categoryInfo.style.display = 'none';
+        }
+        checkInputs();
+    }
+
+    if (suggestionsBox) {
+        suggestionsBox.addEventListener('click', (event) => {
+            const item = event.target.closest('.suggestion-item');
+            if (!item) return;
+            const brand = RETURN_DATA.find(b => b.id === item.dataset.id);
+            if (brand) {
+                selectBrand(brand);
+            }
         });
     }
 
@@ -159,34 +255,57 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle Category Selection to show helper text
     categorySelect.addEventListener('change', (e) => {
         const catIndex = e.target.value;
-        const category = selectedBrandData.categories[catIndex];
-        
-        // Show examples below the dropdown
-        if (category.examples) {
-            categoryHelper.textContent = `✅ Examples: ${category.examples}`;
+        if (!selectedBrandData) {
+            checkInputs();
+            return;
         }
-        checkFormValidity();
+
+        if (catIndex === 'not-sure') {
+            if (categoryInfo) {
+                categoryInfo.textContent = "Select this if you can\u2019t find your item\u2019s category. The standard return policy will be applied.";
+                categoryInfo.style.display = 'block';
+            }
+            categoryHelper.textContent = '';
+            checkInputs();
+            return;
+        }
+
+        const category = selectedBrandData.categories[catIndex];
+        const helperText = category.helperText || category.description || category.examples || category.tip || '';
+
+        if (categoryInfo) {
+            categoryInfo.textContent = helperText;
+            categoryInfo.style.display = helperText ? 'block' : 'none';
+        }
+        categoryHelper.textContent = '';
+        checkInputs();
     });
 
     // ============================================
     // 4. Validation & Calculation
     // ============================================
-    dateInput.addEventListener('change', checkFormValidity);
+    dateInput.addEventListener('change', checkInputs);
 
-    function checkFormValidity() {
+    function checkInputs() {
         if (brandSelect.value && categorySelect.value && dateInput.value) {
             calcBtn.disabled = false;
             calcBtn.style.opacity = "1";
+            calcBtn.style.cursor = "pointer";
         } else {
             calcBtn.disabled = true;
             calcBtn.style.opacity = "0.5";
+            calcBtn.style.cursor = "not-allowed";
         }
     }
 
     calcBtn.addEventListener('click', calculateDeadline);
 
     function calculateDeadline() {
-        const catIndex = categorySelect.value;
+        if (!selectedBrandData || !categorySelect.value || !dateInput.value) {
+            checkInputs();
+            return;
+        }
+        const catIndex = categorySelect.value === 'not-sure' ? 0 : categorySelect.value;
         const category = selectedBrandData.categories[catIndex];
         const purchaseDate = new Date(dateInput.value);
         const days = category.days;

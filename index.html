@@ -50,9 +50,10 @@
         </header>
 
         <main class="calculator-card" id="calculator">
-            <div class="input-group">
+            <div class="input-group search-group">
                 <label for="brand-search"><i class="fa-solid fa-magnifying-glass"></i> 1. FIND RETAILER</label>
                 <input type="text" id="brand-search" placeholder="Type store name (e.g., Walmart, Nike)...">
+                <div id="search-suggestions" role="listbox" aria-label="Retailer suggestions"></div>
                 <select id="brand-select" style="display:none;"></select> 
             </div>
 
@@ -61,6 +62,7 @@
                 <select id="category-select">
                     <option value="" disabled selected>What did you buy?</option>
                 </select>
+                <div id="category-info" class="info-box"></div>
                 <small id="category-helper" style="display:block; margin-top:8px; color:#555; font-size:0.9rem; line-height:1.4;"></small>
             </div>
 
