@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedBrandData.categories.forEach((cat, index) => {
             const option = document.createElement('option');
             option.value = index; // Use index to retrieve data later
-            option.textContent = `${cat.label} (${formatDays(cat.days)})`;
+            option.textContent = `${cat.name} (${formatDays(cat.days)})`;
             categorySelect.appendChild(option);
         });
 
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const category = selectedBrandData.categories[catIndex];
+        const category = selectedBrandData.categories[Number(catIndex)];
         const helperText = category.helperText || category.description || category.examples || category.tip || '';
 
         if (categoryInfo) {
@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
             checkInputs();
             return;
         }
-        const catIndex = categorySelect.value === 'not-sure' ? 0 : categorySelect.value;
+        const catIndex = categorySelect.value === 'not-sure' ? 0 : Number(categorySelect.value);
         const category = selectedBrandData.categories[catIndex];
         const purchaseDate = new Date(dateInput.value);
         const days = category.days;
@@ -345,6 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     function displayResult(dateText, daysLeft, category) {
         resultBox.classList.remove('hidden');
+        resultBox.style.display = 'block';
         
         // Date Display
         resDate.textContent = dateText;
@@ -368,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Details
-        resPolicy.textContent = `${category.label} (${formatDays(category.days)})`;
+        resPolicy.textContent = `${category.name} (${formatDays(category.days)})`;
         resTip.textContent = category.tip || selectedBrandData.tip || "No specific tip available.";
         resRefund.textContent = `Store: ${selectedBrandData.refundInfo.inStore} | Mail: ${selectedBrandData.refundInfo.byMail}`;
     }
