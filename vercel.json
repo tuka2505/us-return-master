@@ -1,13 +1,266 @@
-{
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "redirects": [
-    { "source": "/post1(.*)", "destination": "/amazon-return-policy-no-box-guide", "permanent": true },
-    { "source": "/post2(.*)", "destination": "/walmart-vs-target-return-comparison", "permanent": true },
-    { "source": "/post3(.*)", "destination": "/costco-return-policy-secrets", "permanent": true },
-    { "source": "/post4(.*)", "destination": "/best-buy-restocking-fees-guide", "permanent": true },
-    { "source": "/post5(.*)", "destination": "/holiday-return-deadline-2026", "permanent": true },
-    { "source": "/post6(.*)", "destination": "/return-without-receipt-guide", "permanent": true },
-    { "source": "/(apple|nike|walmart|target|costco|cvs|best-buy|ebay|gap|hm|kohls|lowes|lululemon|macys|marshalls|nordstrom|petco|ross|sephora|shein|temu|walgreens|wayfair|zara)", "destination": "/$1-return-policy", "permanent": true }
-  ]
+﻿{
+    "cleanUrls":  true,
+    "trailingSlash":  false,
+    "redirects":  [
+                      {
+                          "source":  "/(apple|nike|walmart|target|costco|cvs|best-buy|ebay|gap|hm|kohls|lowes|lululemon|macys|marshalls|nordstrom|petco|ross|sephora|shein|temu|walgreens|wayfair|zara)",
+                          "destination":  "/stores/$1-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/about",
+                          "destination":  "/about.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/amazon-return-policy-no-box-guide",
+                          "destination":  "/amazon-return-policy-no-box-guide.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/best-buy-restocking-fees-guide",
+                          "destination":  "/best-buy-restocking-fees-guide.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/best-buy-return-policy-guide(.*)",
+                          "destination":  "/stores/best-buy-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/costco-return-policy-secrets",
+                          "destination":  "/costco-return-policy-secrets.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/holiday-return-deadline-2026",
+                          "destination":  "/holiday-return-deadline-2026.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/index",
+                          "destination":  "/index.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/post1(.*)",
+                          "destination":  "/amazon-return-policy-no-box-guide.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/post2(.*)",
+                          "destination":  "/walmart-vs-target-return-comparison.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/post3(.*)",
+                          "destination":  "/costco-return-policy-secrets.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/post4(.*)",
+                          "destination":  "/best-buy-restocking-fees-guide.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/post5(.*)",
+                          "destination":  "/holiday-return-deadline-2026.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/post6(.*)",
+                          "destination":  "/return-without-receipt-guide.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/privacy",
+                          "destination":  "/privacy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/return-without-receipt-guide",
+                          "destination":  "/return-without-receipt-guide.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/amazon-return-policy",
+                          "destination":  "/stores/amazon-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/apple-return-policy",
+                          "destination":  "/stores/apple-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/best-buy-return-policy",
+                          "destination":  "/stores/best-buy-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/chewy-return-policy",
+                          "destination":  "/stores/chewy-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/costco-return-policy",
+                          "destination":  "/stores/costco-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/cvs-return-policy",
+                          "destination":  "/stores/cvs-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/dicks-return-policy",
+                          "destination":  "/stores/dicks-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/ebay-return-policy",
+                          "destination":  "/stores/ebay-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/gap-return-policy",
+                          "destination":  "/stores/gap-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/hm-return-policy",
+                          "destination":  "/stores/hm-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/home-depot-return-policy",
+                          "destination":  "/stores/home-depot-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/homegoods-return-policy",
+                          "destination":  "/stores/homegoods-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/ikea-return-policy",
+                          "destination":  "/stores/ikea-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/kohls-return-policy",
+                          "destination":  "/stores/kohls-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/lowes-return-policy",
+                          "destination":  "/stores/lowes-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/lululemon-return-policy",
+                          "destination":  "/stores/lululemon-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/macys-return-policy",
+                          "destination":  "/stores/macys-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/marshalls-return-policy",
+                          "destination":  "/stores/marshalls-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/nike-return-policy",
+                          "destination":  "/stores/nike-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/nordstrom-return-policy",
+                          "destination":  "/stores/nordstrom-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/old-navy-return-policy",
+                          "destination":  "/stores/old-navy-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/petco-return-policy",
+                          "destination":  "/stores/petco-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/ross-return-policy",
+                          "destination":  "/stores/ross-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/sephora-return-policy",
+                          "destination":  "/stores/sephora-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/shein-return-policy",
+                          "destination":  "/stores/shein-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/target-return-policy",
+                          "destination":  "/stores/target-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/temu-return-policy",
+                          "destination":  "/stores/temu-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/tj-maxx-return-policy",
+                          "destination":  "/stores/tj-maxx-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/ulta-beauty-return-policy",
+                          "destination":  "/stores/ulta-beauty-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/walgreens-return-policy",
+                          "destination":  "/stores/walgreens-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/walmart-return-policy",
+                          "destination":  "/stores/walmart-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/wayfair-return-policy",
+                          "destination":  "/stores/wayfair-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/stores/zara-return-policy",
+                          "destination":  "/stores/zara-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/terms",
+                          "destination":  "/terms.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/us-retail-return-pro-tips-2026",
+                          "destination":  "/us-retail-return-pro-tips-2026.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/walmart-vs-target-return-comparison",
+                          "destination":  "/walmart-vs-target-return-comparison.html",
+                          "permanent":  true
+                      }
+                  ]
 }

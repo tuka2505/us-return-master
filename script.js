@@ -362,20 +362,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * FIXED: Normalize Path to ensure 404s do not happen.
-     * Always forces 'stores/' prefix and '.html' extension.
+     * Normalize policy paths to avoid 404s.
+     * - Store pages: keep or add 'stores/' prefix.
+     * - Root guides: keep in root and add '.html'.
      */
     function normalizePolicyPath(slug) {
         if (!slug) return '#';
-        
+
+        const hasStoresPrefix = slug.startsWith('stores/');
+
         // 1. Remove existing extension to start clean
         let cleanSlug = slug.replace('.html', '');
-        
+
         // 2. Remove 'stores/' prefix if present to start clean
         cleanSlug = cleanSlug.replace('stores/', '');
-        
+
         // 3. Rebuild consistent path
-        return `stores/${cleanSlug}.html`;
+        return hasStoresPrefix ? `stores/${cleanSlug}.html` : `${cleanSlug}.html`;
     }
 
     // Render Bottom Grid (FIXED: Complete Icon Mapping)
