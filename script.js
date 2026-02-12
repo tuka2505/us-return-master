@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultBox = document.getElementById('result-display');
     const retailerGrid = document.getElementById('retailer-grid');
     const suggestionsBox = document.getElementById('search-suggestions');
+    const comboToggle = document.getElementById('brand-toggle');
 
     // Result Elements
     const resDaysMessage = document.getElementById('res-days-message');
@@ -25,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const resRefundDate = document.getElementById('res-refund-date');
     const resPolicyName = document.getElementById('res-policy-name');
     const resRefundMethod = document.getElementById('res-refund-method');
+    const resProgressBar = document.getElementById('res-progress-bar');
+    const resProgressLabel = document.getElementById('res-progress-label');
 
     let selectedBrandData = null;
 
@@ -148,9 +151,28 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSuggestions(filtered);
     });
 
+    if (comboToggle) {
+        comboToggle.addEventListener('click', () => {
+            const query = brandSearch.value.trim().toLowerCase();
+            if (suggestionsBox.style.display === 'block') {
+                renderSuggestions([]);
+                comboToggle.setAttribute('aria-expanded', 'false');
+                return;
+            }
+            const matches = query
+                ? RETURN_DATA.filter(brand => brand.name.toLowerCase().includes(query))
+                : RETURN_DATA;
+            renderSuggestions(matches, null);
+            comboToggle.setAttribute('aria-expanded', 'true');
+        });
+    }
+
     document.addEventListener('click', (event) => {
         if (!event.target.closest('.search-group')) {
             renderSuggestions([]);
+            if (comboToggle) {
+                comboToggle.setAttribute('aria-expanded', 'false');
+            }
         }
     });
 
@@ -195,22 +217,28 @@ document.addEventListener('DOMContentLoaded', () => {
         checkInputs();
     }
 
-    function renderSuggestions(matches) {
+    function renderSuggestions(matches, maxItems = 8) {
         if (!suggestionsBox) return;
 
         if (!matches.length) {
             suggestionsBox.innerHTML = '';
             suggestionsBox.style.display = 'none';
+            if (comboToggle) {
+                comboToggle.setAttribute('aria-expanded', 'false');
+            }
             return;
         }
 
-        suggestionsBox.innerHTML = matches
-            .slice(0, 8)
+        const list = Number.isInteger(maxItems) ? matches.slice(0, maxItems) : matches;
+        suggestionsBox.innerHTML = list
             .map(match =>
                 `<div class="suggestion-item" data-id="${match.id}">${match.name}</div>`
             )
             .join('');
         suggestionsBox.style.display = 'block';
+        if (comboToggle) {
+            comboToggle.setAttribute('aria-expanded', 'true');
+        }
     }
 
     function selectBrand(brand) {
@@ -312,15 +340,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Handle Special Cases (Lifetime / Final Sale)
         if (days >= 9999) {
-            displayResult("No Deadline (Lifetime)", "Forever", category);
+            displayResult("No Deadline", "Lifetime", category, null, null);
             return;
         }
         if (days === 0) {
-            displayResult("No Returns", "Final Sale", category);
+            displayResult("No Returns", "Final Sale", category, null, null);
             return;
         }
         if (days === -1) {
-            displayResult("Varies", "Case-by-Case", category);
+            displayResult("Varies", "Case-by-Case", category, null, null);
             return;
         }
 
@@ -337,37 +365,47 @@ document.addEventListener('DOMContentLoaded', () => {
         const diffTime = deadline - today;
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        displayResult(deadline, diffDays, category);
+        displayResult(deadline, diffDays, category, days, purchaseDate);
     }
 
     // ============================================
     // 5. Display Results
     // ============================================
-    function displayResult(deadlineDate, daysLeft, category) {
+    function displayResult(deadlineDate, daysLeft, category, totalDays, purchaseDate) {
         resultBox.classList.remove('hidden');
         resultBox.style.display = 'block';
 
         // Remaining Days
-        if (daysLeft < 0) {
-            resDaysMessage.textContent = `Return window closed (${Math.abs(daysLeft)} days ago)`;
+        if (typeof daysLeft !== 'number') {
+            resDaysMessage.textContent = daysLeft;
+            resDaysMessage.style.color = "#0f172a";
+        } else if (daysLeft < 0) {
+            resDaysMessage.textContent = `Closed (${Math.abs(daysLeft)} Days Ago)`;
             resDaysMessage.style.color = "#ef4444";
         } else if (daysLeft === 0) {
-            resDaysMessage.textContent = "You have 0 days left!";
+            resDaysMessage.textContent = "0 Days Left";
             resDaysMessage.style.color = "#ef4444";
         } else if (daysLeft <= 3) {
-            resDaysMessage.textContent = `You have ${daysLeft} days left!`;
+            resDaysMessage.textContent = `${daysLeft} Days Left`;
             resDaysMessage.style.color = "#ef4444";
+        } else if (daysLeft <= 7) {
+            resDaysMessage.textContent = `${daysLeft} Days Left`;
+            resDaysMessage.style.color = "#f59e0b";
         } else {
-            resDaysMessage.textContent = `You have ${daysLeft} days left!`;
+            resDaysMessage.textContent = `${daysLeft} Days Left`;
             resDaysMessage.style.color = "#16a34a";
         }
 
         // Final Deadline
-        resDeadlineDate.textContent = deadlineDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
+        if (deadlineDate instanceof Date) {
+            resDeadlineDate.textContent = deadlineDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        } else {
+            resDeadlineDate.textContent = deadlineDate;
+        }
 
         // Refund Timeline: today + 5 business days
         const refundDate = addBusinessDays(new Date(), 5);
@@ -380,6 +418,34 @@ document.addEventListener('DOMContentLoaded', () => {
         // Policy & Method
         resPolicyName.textContent = `${category.name} (${formatDays(category.days)})`;
         resRefundMethod.textContent = selectedBrandData.refund_method || "Original Payment";
+
+        updateProgressBar(daysLeft, totalDays, purchaseDate);
+    }
+
+    function updateProgressBar(daysLeft, totalDays, purchaseDate) {
+        if (!resProgressBar || !resProgressLabel) return;
+
+        if (typeof totalDays !== 'number' || !purchaseDate) {
+            resProgressBar.style.width = '100%';
+            resProgressBar.className = 'progress-bar progress-safe';
+            resProgressLabel.textContent = 'No deadline tracking';
+            return;
+        }
+
+        const elapsedDays = Math.max(0, totalDays - daysLeft);
+        const percent = totalDays > 0 ? Math.min(100, Math.round((elapsedDays / totalDays) * 100)) : 0;
+        resProgressBar.style.width = `${percent}%`;
+
+        if (daysLeft <= 3) {
+            resProgressBar.className = 'progress-bar progress-urgent';
+            resProgressLabel.textContent = `${percent}% elapsed · Urgent`;
+        } else if (daysLeft <= 7) {
+            resProgressBar.className = 'progress-bar progress-caution';
+            resProgressLabel.textContent = `${percent}% elapsed · Caution`;
+        } else {
+            resProgressBar.className = 'progress-bar progress-safe';
+            resProgressLabel.textContent = `${percent}% elapsed · Safe`;
+        }
     }
 
     function addBusinessDays(startDate, daysToAdd) {

@@ -55,6 +55,9 @@
             <div class="input-group search-group">
                 <label for="brand-search"><i class="fa-solid fa-magnifying-glass"></i> 1. FIND RETAILER</label>
                 <input type="text" id="brand-search" placeholder="Type store name (e.g., Walmart, Nike)...">
+                <button type="button" id="brand-toggle" class="combo-toggle" aria-label="Show all retailers" aria-expanded="false">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
                 <div id="search-suggestions" role="listbox" aria-label="Retailer suggestions"></div>
                 <select id="brand-select" style="display:none;"></select> 
             </div>
@@ -76,22 +79,34 @@
             <button id="calculate-btn" disabled style="opacity: 0.5; cursor: not-allowed;">Check Return Date <i class="fa-solid fa-arrow-right"></i></button>
             
             <div id="result-display" class="result-box hidden" style="display:none;">
-                <div class="result-grid">
-                    <div class="result-card">
-                        <p class="result-label">Remaining Days</p>
-                        <p id="res-days-message" class="result-value">You have -- days left!</p>
+                <div class="result-widget">
+                    <div class="result-hero">
+                        <div class="result-hero-label">Remaining Days</div>
+                        <div id="res-days-message" class="result-hero-value">--</div>
                     </div>
-                    <div class="result-card">
-                        <p class="result-label">Final Deadline</p>
-                        <p id="res-deadline-date" class="result-value">--</p>
+                    <div class="result-progress">
+                        <div class="progress-track">
+                            <div id="res-progress-bar" class="progress-bar progress-safe" style="width: 0%;"></div>
+                        </div>
+                        <div id="res-progress-label" class="progress-label">0% elapsed</div>
                     </div>
-                    <div class="result-card">
-                        <p class="result-label">Refund Timeline</p>
-                        <p class="result-value">If you return today, expected refund by: <span id="res-refund-date">--</span></p>
-                    </div>
-                    <div class="result-card">
-                        <p class="result-label">Policy &amp; Method</p>
-                        <p class="result-value"><span id="res-policy-name">--</span> · <span id="res-refund-method">--</span></p>
+                    <div class="result-info-grid">
+                        <div class="info-cell">
+                            <div class="info-label">Final Deadline</div>
+                            <div id="res-deadline-date" class="info-value">--</div>
+                        </div>
+                        <div class="info-cell">
+                            <div class="info-label">Refund Date</div>
+                            <div id="res-refund-date" class="info-value">--</div>
+                        </div>
+                        <div class="info-cell">
+                            <div class="info-label">Policy</div>
+                            <div id="res-policy-name" class="info-value">--</div>
+                        </div>
+                        <div class="info-cell">
+                            <div class="info-label">Refund Method</div>
+                            <div id="res-refund-method" class="info-value">--</div>
+                        </div>
                     </div>
                 </div>
             </div>
