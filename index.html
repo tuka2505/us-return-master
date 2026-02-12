@@ -8,9 +8,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8176313220764683" crossorigin="anonymous"></script>
-<title>2026 US Return Deadline Tracker | Expert-Verified Deadlines for 30+ Stores</title>
+
+    <title>2026 US Return Deadline Tracker | Expert-Verified Deadlines for 30+ Stores</title>
     <meta name="description" content="2026 Expert-Verified Deadlines for 30+ Stores. 100% Real-time Updated. Get instant, accurate return windows for Amazon, Walmart, Best Buy, and more.">
     
     <meta property="og:title" content="2026 US Return Deadline Tracker | Expert-Verified Deadlines for 30+ Stores">
@@ -22,8 +22,8 @@
     <meta name="twitter:description" content="Don't miss your refund. Check expert-verified return deadlines instantly.">
     <meta name="twitter:image" content="https://checkreturndate.com/us-return-master-preview-2026.jpg">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 
     <script type="application/ld+json">
@@ -54,23 +54,25 @@
         <main class="calculator-card" id="calculator">
             <div class="input-group search-group">
                 <label for="brand-search"><i class="fa-solid fa-magnifying-glass"></i> 1. FIND RETAILER</label>
-                <div class="input-shell">
-                    <input type="text" id="brand-search" class="field-control" placeholder="Type store name (e.g., Walmart, Nike)...">
-                    <button type="button" id="brand-toggle" class="combo-toggle field-chevron" aria-label="Show all retailers" aria-expanded="false">
-                    <i class="fa-solid fa-chevron-down"></i>
-                    </button>
+                <div class="apple-input-wrapper">
+                    <input type="text" id="brand-search" class="apple-input" placeholder="Type store name (e.g., Walmart, Nike)..." autocomplete="off">
+                    <div class="apple-icon-right" id="brand-toggle">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
                 </div>
-                <div id="search-suggestions" role="listbox" aria-label="Retailer suggestions"></div>
+                <div id="search-suggestions" class="suggestions-dropdown" role="listbox"></div>
                 <select id="brand-select" style="display:none;"></select> 
             </div>
 
             <div class="input-group" id="category-group" style="display:none;">
                 <label for="category-select"><i class="fa-solid fa-list"></i> 2. SELECT ITEM CATEGORY</label>
-                <div class="input-shell">
-                    <select id="category-select" class="field-control">
+                <div class="apple-input-wrapper">
+                    <select id="category-select" class="apple-select">
                         <option value="" disabled selected>What did you buy?</option>
                     </select>
-                    <span class="field-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                    <div class="apple-icon-right no-pointer">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
                 </div>
                 <div id="category-info" class="info-box"></div>
                 <small id="category-helper" style="display:block; margin-top:8px; color:#555; font-size:0.9rem; line-height:1.4;"></small>
@@ -78,10 +80,12 @@
 
             <div class="input-group">
                 <label for="purchase-date"><i class="fa-solid fa-calendar-check"></i> 3. PURCHASE DATE</label>
-                <input type="date" id="purchase-date" class="field-control">
+                <div class="apple-input-wrapper">
+                    <input type="date" id="purchase-date" class="apple-input">
+                </div>
             </div>
 
-            <button id="calculate-btn" disabled style="opacity: 0.5; cursor: not-allowed;">Check Return Date <i class="fa-solid fa-arrow-right"></i></button>
+            <button id="calculate-btn" disabled>Check Return Date <i class="fa-solid fa-arrow-right"></i></button>
             
             <div id="result-display" class="result-box hidden" style="display:none;">
                 <div class="result-widget">
@@ -89,23 +93,25 @@
                         <div class="result-hero-label">Remaining Days</div>
                         <div id="res-days-message" class="result-hero-value">--</div>
                     </div>
+                    
                     <div class="result-progress">
                         <div class="progress-track">
-                            <div id="res-progress-bar" class="progress-bar progress-safe" style="width: 0%;"></div>
+                            <div id="res-progress-bar" class="progress-bar" style="width: 0%;"></div>
                         </div>
-                        <div id="res-progress-label" class="progress-label">0% elapsed</div>
+                        <div id="res-progress-label" class="progress-label">Calculation pending...</div>
                     </div>
+                    
                     <div class="result-info-grid">
                         <div class="info-cell">
                             <div class="info-label">Final Deadline</div>
-                            <div id="res-deadline-date" class="info-value">--</div>
+                            <div id="res-deadline-date" class="info-value text-blue">--</div>
                         </div>
                         <div class="info-cell">
-                            <div class="info-label">Refund Date</div>
-                            <div id="res-refund-date" class="info-value">--</div>
+                            <div class="info-label">Expected Refund</div>
+                            <div id="res-refund-date" class="info-value text-blue">--</div>
                         </div>
                         <div class="info-cell">
-                            <div class="info-label">Policy</div>
+                            <div class="info-label">Policy Type</div>
                             <div id="res-policy-name" class="info-value">--</div>
                         </div>
                         <div class="info-cell">
@@ -113,8 +119,9 @@
                             <div id="res-refund-method" class="info-value">--</div>
                         </div>
                     </div>
-                    <a id="view-policy-btn" class="policy-button" href="#" style="display:none;">
-                        View Full Policy <i class="fa-solid fa-arrow-right"></i>
+                    
+                    <a id="view-policy-btn" class="policy-button" href="#">
+                        View Full Policy Guide <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
@@ -123,69 +130,69 @@
         <section class="info-section">
             <h2 class="section-title">Featured Store Guides</h2>
             <div class="guide-grid">
-                <a href="stores/amazon-return-policy" class="guide-card" style="text-align: center; padding: 30px 20px;">
-                    <div style="font-size: 3rem; color: #FF9900; margin-bottom: 15px;"><i class="fa-brands fa-amazon"></i></div>
+                <a href="stores/amazon-return-policy" class="guide-card centered-card">
+                    <div class="card-icon color-amazon"><i class="fa-brands fa-amazon"></i></div>
                     <h3>Amazon Return Secret</h3>
                     <p>No box? Get your refund without packaging.</p>
                 </a>
-                <a href="stores/walmart-return-policy" class="guide-card" style="text-align: center; padding: 30px 20px;">
-                    <div style="font-size: 3rem; color: #0071ce; margin-bottom: 15px;"><i class="fa-solid fa-star"></i></div>
+                <a href="stores/walmart-return-policy" class="guide-card centered-card">
+                    <div class="card-icon color-walmart"><i class="fa-solid fa-star"></i></div>
                     <h3>Walmart Policy 2026</h3>
                     <p>Master the 90-day rule for faster refunds.</p>
                 </a>
-                <a href="stores/target-return-policy" class="guide-card" style="text-align: center; padding: 30px 20px;">
-                    <div style="font-size: 3rem; color: #CC0000; margin-bottom: 15px;"><i class="fa-solid fa-circle-dot"></i></div>
+                <a href="stores/target-return-policy" class="guide-card centered-card">
+                    <div class="card-icon color-target"><i class="fa-solid fa-circle-dot"></i></div>
                     <h3>Target RedCard Perks</h3>
                     <p>Get an extra 30 days on your returns.</p>
                 </a>
-                <a href="stores/costco-return-policy" class="guide-card" style="text-align: center; padding: 30px 20px;">
-                    <div style="font-size: 3rem; color: #005da4; margin-bottom: 15px;"><i class="fa-solid fa-cart-shopping"></i></div>
+                <a href="stores/costco-return-policy" class="guide-card centered-card">
+                    <div class="card-icon color-costco"><i class="fa-solid fa-cart-shopping"></i></div>
                     <h3>Costco Lifetime Rule</h3>
                     <p>The items you can return forever.</p>
                 </a>
-                <a href="stores/apple-return-policy" class="guide-card" style="text-align: center; padding: 30px 20px;">
-                    <div style="font-size: 3rem; color: #000; margin-bottom: 15px;"><i class="fa-brands fa-apple"></i></div>
+                <a href="stores/apple-return-policy" class="guide-card centered-card">
+                    <div class="card-icon color-apple"><i class="fa-brands fa-apple"></i></div>
                     <h3>Apple Store Guide</h3>
                     <p>Strict 14-day rule. Don't miss the window.</p>
                 </a>
-                <a href="stores/best-buy-return-policy" class="guide-card" style="text-align: center; padding: 30px 20px;">
-                    <div style="font-size: 3rem; color: #0046be; margin-bottom: 15px;"><i class="fa-solid fa-tag"></i></div>
+                <a href="stores/best-buy-return-policy" class="guide-card centered-card">
+                    <div class="card-icon color-bestbuy"><i class="fa-solid fa-tag"></i></div>
                     <h3>Avoid Best Buy Fees</h3>
                     <p>Pro-tips to dodge restocking charges.</p>
                 </a>
             </div>
         </section>
 
-        <section class="info-section" style="margin-top: 40px;">
+        <section class="info-section mt-large">
             <h2 class="section-title">Pro Shopping Tips</h2>
             <div class="guide-grid">
-                <a href="amazon-return-policy-no-box-guide" class="guide-card" style="display: flex; align-items: center; gap: 15px; padding: 15px;">
-                    <i class="fa-solid fa-box-open" style="font-size: 1.5rem; color: var(--primary);"></i>
-                    <div><h3 style="font-size: 1rem; margin:0;">Amazon Returns 101</h3><p style="font-size:0.8rem; margin:0;">Quick guide to Amazon.</p></div>
+                <a href="amazon-return-policy-no-box-guide" class="guide-card flex-card">
+                    <i class="fa-solid fa-box-open guide-icon"></i>
+                    <div><h3>Amazon Returns 101</h3><p>Quick guide to Amazon.</p></div>
                 </a>
-                <a href="walmart-vs-target-return-comparison" class="guide-card" style="display: flex; align-items: center; gap: 15px; padding: 15px;">
-                    <i class="fa-solid fa-balance-scale" style="font-size: 1.5rem; color: var(--primary);"></i>
-                    <div><h3 style="font-size: 1rem; margin:0;">Walmart vs Target</h3><p style="font-size:0.8rem; margin:0;">Policy comparison.</p></div>
+                <a href="walmart-vs-target-return-comparison" class="guide-card flex-card">
+                    <i class="fa-solid fa-balance-scale guide-icon"></i>
+                    <div><h3>Walmart vs Target</h3><p>Policy comparison.</p></div>
                 </a>
-                <a href="costco-return-policy-secrets" class="guide-card" style="display: flex; align-items: center; gap: 15px; padding: 15px;">
-                    <i class="fa-solid fa-cart-flatbed" style="font-size: 1.5rem; color: var(--primary);"></i>
-                    <div><h3 style="font-size: 1rem; margin:0;">Costco Secrets</h3><p style="font-size:0.8rem; margin:0;">Lifetime return tips.</p></div>
+                <a href="costco-return-policy-secrets" class="guide-card flex-card">
+                    <i class="fa-solid fa-cart-flatbed guide-icon"></i>
+                    <div><h3>Costco Secrets</h3><p>Lifetime return tips.</p></div>
                 </a>
-                <a href="best-buy-restocking-fees-guide" class="guide-card" style="display: flex; align-items: center; gap: 15px; padding: 15px;">
-                    <i class="fa-solid fa-credit-card" style="font-size: 1.5rem; color: var(--primary);"></i>
-                    <div><h3 style="font-size: 1rem; margin:0;">Best Buy Fees</h3><p style="font-size:0.8rem; margin:0;">Save on tech returns.</p></div>
+                <a href="best-buy-restocking-fees-guide" class="guide-card flex-card">
+                    <i class="fa-solid fa-credit-card guide-icon"></i>
+                    <div><h3>Best Buy Fees</h3><p>Save on tech returns.</p></div>
                 </a>
-                <a href="holiday-return-deadline-2026" class="guide-card" style="display: flex; align-items: center; gap: 15px; padding: 15px;">
-                    <i class="fa-solid fa-gift" style="font-size: 1.5rem; color: var(--primary);"></i>
-                    <div><h3 style="font-size: 1rem; margin:0;">Holiday Extensions</h3><p style="font-size:0.8rem; margin:0;">2026 seasonal deadlines.</p></div>
+                <a href="holiday-return-deadline-2026" class="guide-card flex-card">
+                    <i class="fa-solid fa-gift guide-icon"></i>
+                    <div><h3>Holiday Extensions</h3><p>2026 seasonal deadlines.</p></div>
                 </a>
-                <a href="return-without-receipt-guide" class="guide-card" style="display: flex; align-items: center; gap: 15px; padding: 15px;">
-                    <i class="fa-solid fa-receipt" style="font-size: 1.5rem; color: var(--primary);"></i>
-                    <div><h3 style="font-size: 1rem; margin:0;">No Receipt Returns</h3><p style="font-size:0.8rem; margin:0;">Returns without proof.</p></div>
+                <a href="return-without-receipt-guide" class="guide-card flex-card">
+                    <i class="fa-solid fa-receipt guide-icon"></i>
+                    <div><h3>No Receipt Returns</h3><p>Returns without proof.</p></div>
                 </a>
-                <a href="us-retail-return-pro-tips-2026" class="guide-card" style="display: flex; align-items: center; gap: 15px; padding: 15px;">
-                    <i class="fa-solid fa-circle-info" style="font-size: 1.5rem; color: var(--primary);"></i>
-                    <div><h3 style="font-size: 1rem; margin:0;">2026 Return Pro-Tips</h3><p style="font-size:0.8rem; margin:0;">Avoid common mistakes.</p></div>
+                <a href="us-retail-return-pro-tips-2026" class="guide-card flex-card">
+                    <i class="fa-solid fa-circle-info guide-icon"></i>
+                    <div><h3>2026 Return Pro-Tips</h3><p>Avoid common mistakes.</p></div>
                 </a>
             </div>
         </section>
