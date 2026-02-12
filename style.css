@@ -424,10 +424,45 @@ button#calculate-btn:disabled {
 .guide-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
 
 /* --- Retailer Mini Grid --- */
-.retailer-grid {
+#retailer-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 16px;
+    padding: 20px 0;
+}
+
+.mini-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    background: #ffffff;
+    border-radius: 18px;
+    text-decoration: none;
+    color: #1d1d1f;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mini-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: #0071e3;
+}
+
+.mini-card i {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #0071e3;
+}
+
+.mini-card span {
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    word-break: break-word;
 }
 
 /* --- Footer --- */
