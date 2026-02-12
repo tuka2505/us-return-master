@@ -1,17 +1,14 @@
 :root {
-    --primary: #0071e3; /* Apple Blue */
-    --primary-dark: #005bb5;
+    --primary: #0071e3;
+    --primary-dark: #0060c9;
     --text-main: #1d1d1f;
-    --text-muted: #86868b;
-    --bg-light: #f5f5f7; /* Apple Background */
+    --text-muted: #6e6e73;
+    --bg-light: #f5f5f7;
     --white: #ffffff;
-    --border-color: #d2d2d7;
-    --input-bg: #e8e8ed; /* Input background */
-    --success: #34c759;
-    --warning: #ff9f0a;
-    --danger: #ff3b30;
-    --radius-input: 12px;
-    --radius-card: 20px;
+    --border-soft: rgba(0, 0, 0, 0.05);
+    --shadow-float: 0 30px 60px rgba(0, 0, 0, 0.08);
+    --radius-input: 14px;
+    --radius-card: 24px;
 }
 
 * {
@@ -22,22 +19,26 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-light);
     color: var(--text-main);
     line-height: 1.5;
-    padding: 40px 20px;
+    padding: 48px 20px;
 }
 
 .container {
-    max-width: 680px;
+    max-width: 700px;
     margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.03em;
 }
 
 /* --- Header --- */
 header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 44px;
 }
 
 .logo {
@@ -48,26 +49,26 @@ header {
     letter-spacing: -0.01em;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
 }
 
 header h1 {
-    font-size: 2.6rem;
+    font-size: 2.7rem;
     font-weight: 800;
-    letter-spacing: -0.03em;
     line-height: 1.05;
     margin-bottom: 16px;
-    color: #000;
+    color: var(--text-main);
 }
 
 header h1 span { color: var(--primary); }
-.subtitle { color: var(--text-muted); font-size: 1.15rem; font-weight: 400; letter-spacing: -0.01em; }
+.subtitle { color: var(--text-muted); font-size: 1.15rem; font-weight: 400; }
 
 .banner-container {
     margin-top: 30px;
     border-radius: var(--radius-card);
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-float);
+    border: 1px solid var(--border-soft);
 }
 
 .retailer-banner {
@@ -79,14 +80,15 @@ header h1 span { color: var(--primary); }
 /* --- Calculator Card --- */
 .calculator-card {
     background: var(--white);
-    padding: 40px;
-    border-radius: 30px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+    padding: 60px 40px;
+    border-radius: 32px;
+    box-shadow: var(--shadow-float);
+    border: 1px solid var(--border-soft);
 }
 
-/* --- Apple Input System (Unified) --- */
+/* --- Apple Input System --- */
 .input-group {
-    margin-bottom: 24px;
+    margin-bottom: 26px;
     position: relative;
     max-width: 520px;
     margin-left: auto;
@@ -97,63 +99,64 @@ label {
     display: block;
     font-weight: 600;
     margin-bottom: 8px;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     color: var(--text-muted);
 }
 
-/* Wrapper ensures positioning context */
 .apple-input-wrapper {
     position: relative;
     width: 100%;
 }
 
-/* Shared styles for Input and Select to make them identical */
-.apple-input, .apple-select {
+.apple-input,
+.apple-select {
     width: 100%;
-    height: 56px; /* Fixed height for consistency */
-    padding: 0 46px 0 16px; /* Right padding for icon space */
-    border: 1px solid transparent; /* No border initially */
+    height: 56px;
+    padding: 0 46px 0 16px;
+    border: 1px solid var(--border-soft);
     border-radius: var(--radius-input);
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-family: inherit;
-    background-color: var(--input-bg);
+    background-color: var(--bg-light);
     color: var(--text-main);
-    transition: all 0.2s ease;
-    appearance: none; /* Removes native dropdown arrow */
+    transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    appearance: none;
     -webkit-appearance: none;
-    line-height: normal;
 }
 
-/* Focus State */
-.apple-input:focus, .apple-select:focus {
+.apple-input:focus,
+.apple-select:focus {
     outline: none;
     background-color: var(--white);
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15);
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 0 6px rgba(0, 113, 227, 0.12);
 }
 
-/* Icon positioning */
 .apple-icon-right {
     position: absolute;
     right: 16px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
-    pointer-events: none; /* Clicks pass through to the input/select */
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
 }
 
-/* For the search toggle button, we allow clicks */
+.apple-icon-right i {
+    font-size: 0.7rem;
+    opacity: 0.75;
+}
+
+.no-pointer { pointer-events: none; }
+
 #brand-toggle {
-    pointer-events: auto;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: color 0.2s ease;
 }
 
 #brand-toggle:hover {
@@ -166,39 +169,41 @@ label {
     top: calc(100% + 8px);
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-radius: 12px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    border-radius: 14px;
+    box-shadow: var(--shadow-float);
+    border: 1px solid var(--border-soft);
     z-index: 100;
     max-height: 280px;
     overflow-y: auto;
     display: none;
-    padding: 6px;
+    padding: 8px;
 }
 
 .suggestion-item {
     padding: 12px 14px;
     cursor: pointer;
     font-weight: 500;
-    border-radius: 8px;
+    border-radius: 10px;
     color: var(--text-main);
-    transition: background 0.1s;
+    transition: background 0.15s ease, color 0.15s ease;
 }
 
-.suggestion-item:hover, .suggestion-item.is-active {
-    background: var(--primary);
-    color: white;
+.suggestion-item:hover,
+.suggestion-item.is-active {
+    background: rgba(0, 113, 227, 0.1);
+    color: var(--primary);
 }
 
 /* Helper Text */
 .info-box {
     margin-top: 10px;
-    background: #f2f7ff;
-    border: 1px solid rgba(0, 113, 227, 0.1);
-    border-radius: 10px;
-    padding: 12px;
+    background: rgba(0, 113, 227, 0.06);
+    border: 1px solid rgba(0, 113, 227, 0.12);
+    border-radius: 12px;
+    padding: 12px 14px;
     font-size: 0.9rem;
     color: var(--primary-dark);
     display: none;
@@ -212,22 +217,22 @@ button#calculate-btn {
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin: 20px auto 0;
+    margin: 24px auto 0;
     padding: 18px;
     background-color: var(--primary);
-    color: white;
+    color: var(--white);
     border: none;
-    border-radius: 14px;
-    font-size: 1.1rem;
+    border-radius: 16px;
+    font-size: 1.05rem;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 button#calculate-btn:hover {
     background-color: var(--primary-dark);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(0, 113, 227, 0.25);
+    transform: scale(1.02);
+    box-shadow: 0 14px 30px rgba(0, 113, 227, 0.28);
 }
 
 button#calculate-btn:disabled {
@@ -237,31 +242,33 @@ button#calculate-btn:disabled {
     box-shadow: none;
 }
 
-/* --- Result Dashboard (Apple Widget) --- */
+/* --- Result Dashboard --- */
 .result-box {
     margin-top: 40px;
     max-width: 520px;
     margin-left: auto;
     margin-right: auto;
     display: none;
-    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: resultReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
+@keyframes resultReveal {
+    from { opacity: 0; transform: translateY(18px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .result-widget {
-    background: #fff;
-    border-radius: 24px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-    border: 1px solid rgba(0,0,0,0.05);
+    background: rgba(255, 255, 255, 0.78);
+    border-radius: 28px;
+    box-shadow: var(--shadow-float);
+    border: 1px solid var(--border-soft);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     overflow: hidden;
 }
 
 .result-hero {
-    padding: 30px 30px 20px;
+    padding: 34px 32px 22px;
     text-align: center;
 }
 
@@ -269,28 +276,35 @@ button#calculate-btn:disabled {
     text-transform: uppercase;
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     color: var(--text-muted);
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 }
 
 .result-hero-value {
-    font-size: 2.8rem;
+    font-size: 3.6rem;
     font-weight: 800;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     color: var(--text-main);
-    line-height: 1.1;
+    line-height: 1.05;
+}
+
+#res-days-message {
+    font-size: 3.6rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #1d1d1f;
 }
 
 .result-progress {
-    padding: 0 30px 30px;
+    padding: 0 32px 30px;
     text-align: center;
 }
 
 .progress-track {
     width: 100%;
     height: 8px;
-    background: #e5e5ea;
+    background: rgba(0, 0, 0, 0.08);
     border-radius: 999px;
     overflow: hidden;
 }
@@ -312,17 +326,18 @@ button#calculate-btn:disabled {
 .result-info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background: var(--border-color); /* Creates the lines */
-    gap: 1px; /* Gap creates the border lines */
-    border-top: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.05);
+    gap: 1px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .info-cell {
-    background: #fff;
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 20px 22px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    line-height: 1.6;
 }
 
 .info-label {
@@ -331,43 +346,43 @@ button#calculate-btn:disabled {
     text-transform: uppercase;
     color: var(--text-muted);
     margin-bottom: 6px;
+    letter-spacing: 0.06em;
 }
 
 .info-value {
     font-size: 1rem;
     font-weight: 600;
     color: var(--text-main);
-    line-height: 1.3;
 }
 
-.text-blue { color: var(--primary); }
-.text-red { color: var(--danger); }
+.text-blue { color: #0071e3; }
+.text-red { color: #eb5757; }
 
-/* Policy Button (Secondary) */
+/* Policy Button (Ghost) */
 .policy-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
     width: 100%;
-    padding: 16px;
-    background: #f5f5f7;
-    color: var(--text-main);
+    padding: 16px 18px;
+    background: rgba(0, 113, 227, 0.05);
+    color: var(--primary);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    border-top: 1px solid var(--border-color);
-    transition: background 0.2s;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .policy-button:hover {
-    background: #eeeeef;
-    color: var(--primary);
+    background: rgba(0, 113, 227, 0.1);
+    transform: translateY(-1px);
 }
 
 /* --- Guides & Grid --- */
-.info-section { margin-top: 60px; }
-.section-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 25px; }
+.info-section { margin-top: 64px; }
+.section-title { font-size: 1.55rem; font-weight: 700; margin-bottom: 26px; letter-spacing: -0.03em; }
 
 .guide-grid {
     display: grid;
@@ -377,38 +392,36 @@ button#calculate-btn:disabled {
 
 .guide-card {
     background: var(--white);
-    padding: 24px;
-    border-radius: 20px;
+    padding: 26px;
+    border-radius: 22px;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0,0,0,0.02);
+    box-shadow: var(--shadow-float);
+    border: 1px solid var(--border-soft);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .guide-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.12);
 }
 
-/* Centered Card Style (Top Guides) */
 .centered-card { text-align: center; }
 .card-icon { font-size: 2.5rem; margin-bottom: 15px; }
 
-/* Flex Card Style (Bottom Tips) */
 .flex-card { display: flex; align-items: center; gap: 16px; padding: 20px; }
 .guide-icon { font-size: 1.4rem; color: var(--primary); width: 30px; text-align: center; }
 
 /* Brand Colors */
-.color-amazon { color: #FF9900; }
+.color-amazon { color: #ff9900; }
 .color-walmart { color: #0071ce; }
-.color-target { color: #CC0000; }
+.color-target { color: #cc0000; }
 .color-costco { color: #005da4; }
 .color-apple { color: #1d1d1f; }
 .color-bestbuy { color: #0046be; }
 
 .guide-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
-.guide-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.4; }
+.guide-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
 
 /* --- Retailer Mini Grid --- */
 .retailer-grid {
@@ -419,18 +432,19 @@ button#calculate-btn:disabled {
 
 /* --- Footer --- */
 footer {
-    margin-top: 60px;
-    padding-top: 40px;
-    border-top: 1px solid var(--border-color);
+    margin-top: 64px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border-soft);
     text-align: center;
 }
 .footer-links a { margin: 0 10px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
-footer p { font-size: 0.8rem; color: #a1a1a6; margin-top: 15px; }
+footer p { font-size: 0.82rem; color: #a1a1a6; margin-top: 14px; }
 
 /* --- Mobile --- */
 @media (max-width: 600px) {
-    header h1 { font-size: 2rem; }
-    .calculator-card { padding: 30px 20px; }
-    .result-info-grid { grid-template-columns: 1fr; } /* Stack details on mobile */
-    .info-cell { border-right: none; }
+    header h1 { font-size: 2.05rem; }
+    .calculator-card { padding: 36px 22px; }
+    .result-info-grid { grid-template-columns: 1fr; }
+    .result-hero-value,
+    #res-days-message { font-size: 3rem; }
 }
