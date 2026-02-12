@@ -448,3 +448,76 @@ footer p { font-size: 0.82rem; color: #a1a1a6; margin-top: 14px; }
     .result-hero-value,
     #res-days-message { font-size: 3rem; }
 }
+
+.expert-insights {
+    margin: 30px 0;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.expert-insights-box {
+    background: rgba(0, 113, 227, 0.05);
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.expert-insights-list {
+    list-style: none;
+    margin: 0 0 16px 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.expert-insights-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: #1d1d1f;
+}
+
+.expert-insights-days {
+    color: #0071e3;
+}
+
+.expert-insights-tip {
+    background: rgba(0, 113, 227, 0.08);
+    border-radius: 14px;
+    padding: 14px;
+    color: #1d1d1f;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.expert-insights-label {
+    color: #0071e3;
+}
+
+.section-divider {
+    height: 1px;
+    background: var(--border-soft);
+    margin: 30px 0;
+}
+
+.quick-summary {
+    margin: 30px 0;
+}
+
+.quick-summary-box {
+    background: rgba(0, 113, 227, 0.05);
+    border-radius: 18px;
+    padding: 20px;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.quick-summary-title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #1d1d1f;
+}
+
+.quick-summary-text {
+    color: #1d1d1f;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}

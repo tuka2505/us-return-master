@@ -299,6 +299,18 @@ const RETURN_DATA = [
         ]
     },
     {
+        id: "hm",
+        name: "H&M",
+        slug: "stores/hm-return-policy",
+        categoryType: "fashion",
+        tip: "Standard returns are accepted within 30 days.",
+        refund_method: "Original Payment",
+        refundInfo: { inStore: "Original Payment", byMail: "Original Payment" },
+        categories: [
+            { name: "Standard Items", days: 30, helperText: "Clothing and accessories" }
+        ]
+    },
+    {
         id: "oldnavy",
         name: "Old Navy",
         slug: "stores/old-navy-return-policy",
@@ -433,6 +445,7 @@ const REFUND_TIMELINES = {
     shein: 5,
     kohls: 5,
     gap: 5,
+    hm: 5,
     oldnavy: 5,
     zara: 5,
     wayfair: 5,
