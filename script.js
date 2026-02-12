@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // E. Link Button
         if (selectedBrandData.slug) {
-            viewPolicyBtn.href = `stores/${selectedBrandData.slug}`; // Fixed path
+            viewPolicyBtn.href = normalizePolicyPath(selectedBrandData.slug);
             viewPolicyBtn.style.display = 'flex';
             viewPolicyBtn.innerHTML = `View Full ${selectedBrandData.name} Policy <i class="fa-solid fa-arrow-right"></i>`;
         } else {
@@ -334,6 +334,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${d} Days`;
     }
 
+    function normalizePolicyPath(slug) {
+        if (!slug) return '#';
+        const normalized = slug.startsWith('stores/') ? slug : `stores/${slug}`;
+        return normalized.endsWith('.html') ? normalized : `${normalized}.html`;
+    }
+
     // Render Bottom Grid
     function renderRetailerGrid(data) {
         if (!retailerGrid) return;
@@ -341,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data.forEach(brand => {
             const a = document.createElement('a');
             a.className = 'mini-card';
-            a.href = `stores/${brand.slug}`; // Fixed path
+            a.href = normalizePolicyPath(brand.slug);
             
             // Simple Icon Logic (You can expand this map)
             let iconClass = 'fa-solid fa-store';
