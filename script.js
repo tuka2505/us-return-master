@@ -393,7 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
             bestbuy: 'fa-solid fa-tag',
             homedepot: 'fa-solid fa-hammer',
             lowes: 'fa-solid fa-paint-roller',
-            nike: 'fa-brands fa-nike', // If free version supports it, otherwise fa-person-running
+            nike: 'fa-solid fa-person-running',
             lululemon: 'fa-solid fa-spa',
             sephora: 'fa-solid fa-wand-magic-sparkles',
             ultabeauty: 'fa-solid fa-brush',
