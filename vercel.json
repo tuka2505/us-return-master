@@ -1,5 +1,5 @@
 ﻿{
-    "cleanUrls":  true,
+    "cleanUrls":  false,
     "trailingSlash":  false,
     "redirects":  [
                       {
@@ -30,6 +30,16 @@
                       {
                           "source":  "/costco-return-policy-secrets",
                           "destination":  "/costco-return-policy-secrets.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/cvs-return-policy",
+                          "destination":  "/stores/cvs-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/cvs-return-policy.html",
+                          "destination":  "/stores/cvs-return-policy.html",
                           "permanent":  true
                       },
                       {
@@ -65,6 +75,26 @@
                       {
                           "source":  "/post5(.*)",
                           "destination":  "/holiday-return-deadline-2026.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/ross-return-policy",
+                          "destination":  "/stores/ross-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/ross-return-policy.html",
+                          "destination":  "/stores/ross-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/sephora-return-policy",
+                          "destination":  "/stores/sephora-return-policy.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/sephora-return-policy.html",
+                          "destination":  "/stores/sephora-return-policy.html",
                           "permanent":  true
                       },
                       {
