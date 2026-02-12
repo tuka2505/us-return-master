@@ -1,6 +1,6 @@
 /**
  * US Return Master - Core Logic (Final Apple Style)
- * Features: Apple-style Combo Box, Business Day Calculation, Smooth UI
+ * Features: Apple-style Combo Box, Business Day Calculation, Smooth UI, Icon Mapping
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -37,12 +37,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. Initialization ---
     function init() {
         // Set today as default
-        dateInput.valueAsDate = new Date();
-        renderRetailerGrid(RETURN_DATA);
+        if (dateInput) {
+            dateInput.valueAsDate = new Date();
+        }
+        
+        // Render the grid if data exists
+        if (typeof RETURN_DATA !== 'undefined') {
+            renderRetailerGrid(RETURN_DATA);
+        }
         
         // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
-            if (!brandSearch.contains(e.target) && !brandToggle.contains(e.target) && !suggestionsBox.contains(e.target)) {
+            if (brandSearch && !brandSearch.contains(e.target) && !brandToggle.contains(e.target) && !suggestionsBox.contains(e.target)) {
                 suggestionsBox.style.display = 'none';
             }
         });
@@ -53,47 +59,53 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 2. Search & Dropdown Logic (Apple Style) ---
     
     // Toggle dropdown on arrow click
-    brandToggle.addEventListener('click', () => {
-        if (suggestionsBox.style.display === 'block') {
-            suggestionsBox.style.display = 'none';
-        } else {
-            // Show all brands if input is empty, otherwise filter
+    if (brandToggle) {
+        brandToggle.addEventListener('click', () => {
+            if (suggestionsBox.style.display === 'block') {
+                suggestionsBox.style.display = 'none';
+            } else {
+                // Show all brands if input is empty, otherwise filter
+                const query = brandSearch.value.trim().toLowerCase();
+                const matches = query 
+                    ? RETURN_DATA.filter(b => b.name.toLowerCase().includes(query)) 
+                    : RETURN_DATA;
+                renderSuggestions(matches);
+                brandSearch.focus();
+            }
+        });
+    }
+
+    // Filter on typing
+    if (brandSearch) {
+        brandSearch.addEventListener('input', (e) => {
+            const query = e.target.value.trim().toLowerCase();
+            
+            // Reset if empty
+            if (!query) {
+                selectedBrandData = null;
+                categoryGroup.style.display = 'none';
+                resultBox.style.display = 'none';
+                renderSuggestions(RETURN_DATA); // Show all
+                return;
+            }
+
+            const matches = RETURN_DATA.filter(b => b.name.toLowerCase().includes(query));
+            renderSuggestions(matches);
+        });
+
+        // Focus opens dropdown
+        brandSearch.addEventListener('focus', () => {
             const query = brandSearch.value.trim().toLowerCase();
             const matches = query 
                 ? RETURN_DATA.filter(b => b.name.toLowerCase().includes(query)) 
                 : RETURN_DATA;
             renderSuggestions(matches);
-            brandSearch.focus();
-        }
-    });
-
-    // Filter on typing
-    brandSearch.addEventListener('input', (e) => {
-        const query = e.target.value.trim().toLowerCase();
-        
-        // Reset if empty
-        if (!query) {
-            selectedBrandData = null;
-            categoryGroup.style.display = 'none';
-            resultBox.style.display = 'none';
-            renderSuggestions(RETURN_DATA); // Show all
-            return;
-        }
-
-        const matches = RETURN_DATA.filter(b => b.name.toLowerCase().includes(query));
-        renderSuggestions(matches);
-    });
-
-    // Focus opens dropdown
-    brandSearch.addEventListener('focus', () => {
-        const query = brandSearch.value.trim().toLowerCase();
-        const matches = query 
-            ? RETURN_DATA.filter(b => b.name.toLowerCase().includes(query)) 
-            : RETURN_DATA;
-        renderSuggestions(matches);
-    });
+        });
+    }
 
     function renderSuggestions(matches) {
+        if (!suggestionsBox) return;
+
         if (!matches.length) {
             suggestionsBox.innerHTML = '<div class="suggestion-item" style="cursor:default; color:#999;">No stores found</div>';
             suggestionsBox.style.display = 'block';
@@ -147,32 +159,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. Category & Inputs ---
     
-    categorySelect.addEventListener('change', () => {
-        checkInputs();
-        
-        // Helper Text Logic
-        if (categorySelect.value === 'not-sure') {
-            categoryInfo.textContent = "We'll apply the standard return policy.";
-            categoryInfo.style.display = 'block';
-            return;
-        }
-
-        const catIdx = Number(categorySelect.value);
-        if (selectedBrandData && selectedBrandData.categories[catIdx]) {
-            const cat = selectedBrandData.categories[catIdx];
-            const info = cat.helperText || cat.description || cat.tip;
-            if (info) {
-                categoryInfo.textContent = info;
+    if (categorySelect) {
+        categorySelect.addEventListener('change', () => {
+            checkInputs();
+            
+            // Helper Text Logic
+            if (categorySelect.value === 'not-sure') {
+                categoryInfo.textContent = "We'll apply the standard return policy.";
                 categoryInfo.style.display = 'block';
-            } else {
-                categoryInfo.style.display = 'none';
+                return;
             }
-        }
-    });
 
-    dateInput.addEventListener('change', checkInputs);
+            const catIdx = Number(categorySelect.value);
+            if (selectedBrandData && selectedBrandData.categories[catIdx]) {
+                const cat = selectedBrandData.categories[catIdx];
+                const info = cat.helperText || cat.description || cat.tip;
+                if (info) {
+                    categoryInfo.textContent = info;
+                    categoryInfo.style.display = 'block';
+                } else {
+                    categoryInfo.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    if (dateInput) {
+        dateInput.addEventListener('change', checkInputs);
+    }
 
     function checkInputs() {
+        if (!calcBtn) return;
+        
         if (selectedBrandData && categorySelect.value && dateInput.value) {
             calcBtn.disabled = false;
         } else {
@@ -182,55 +200,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 4. Calculation Logic (The Brain) ---
     
-    calcBtn.addEventListener('click', () => {
-        if (!selectedBrandData) return;
+    if (calcBtn) {
+        calcBtn.addEventListener('click', () => {
+            if (!selectedBrandData) return;
 
-        // 1. Get Category Data
-        let category;
-        if (categorySelect.value === 'not-sure') {
-            // Default to first category (usually standard)
-            category = selectedBrandData.categories[0]; 
-        } else {
-            category = selectedBrandData.categories[Number(categorySelect.value)];
-        }
+            // 1. Get Category Data
+            let category;
+            if (categorySelect.value === 'not-sure') {
+                // Default to first category (usually standard)
+                category = selectedBrandData.categories[0]; 
+            } else {
+                category = selectedBrandData.categories[Number(categorySelect.value)];
+            }
 
-        const purchaseDate = new Date(dateInput.value);
-        const limitDays = category.days;
-        
-        // 2. Calculate Final Deadline
-        let deadlineDate;
-        let daysLeft;
-        let isLifetime = false;
-        let isFinalSale = false;
-
-        if (limitDays >= 9999) {
-            isLifetime = true;
-            daysLeft = "Lifetime";
-        } else if (limitDays === 0) {
-            isFinalSale = true;
-            daysLeft = 0;
-        } else {
-            deadlineDate = new Date(purchaseDate);
-            deadlineDate.setDate(purchaseDate.getDate() + limitDays);
+            const purchaseDate = new Date(dateInput.value);
+            const limitDays = category.days;
             
-            // Days Left Calc
-            const today = new Date();
-            today.setHours(0,0,0,0);
-            const dDate = new Date(deadlineDate);
-            dDate.setHours(0,0,0,0);
-            
-            const diffTime = dDate - today;
-            daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        }
+            // 2. Calculate Final Deadline
+            let deadlineDate;
+            let daysLeft;
+            let isLifetime = false;
+            let isFinalSale = false;
 
-        // 3. Calculate Refund Date (Business Days)
-        // Check if refund_days exists in data, else default to 5
-        const refundDays = (selectedBrandData.refund_days !== undefined) ? selectedBrandData.refund_days : 5;
-        const estimatedRefund = addBusinessDays(new Date(), refundDays);
+            if (limitDays >= 9999) {
+                isLifetime = true;
+                daysLeft = "Lifetime";
+            } else if (limitDays === 0) {
+                isFinalSale = true;
+                daysLeft = 0;
+            } else {
+                deadlineDate = new Date(purchaseDate);
+                deadlineDate.setDate(purchaseDate.getDate() + limitDays);
+                
+                // Days Left Calc
+                const today = new Date();
+                today.setHours(0,0,0,0);
+                const dDate = new Date(deadlineDate);
+                dDate.setHours(0,0,0,0);
+                
+                const diffTime = dDate - today;
+                daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            }
 
-        // 4. Render Results
-        renderDashboard(daysLeft, deadlineDate, estimatedRefund, category, isLifetime, isFinalSale, limitDays, purchaseDate);
-    });
+            // 3. Calculate Refund Date (Business Days)
+            // Check if refund_days exists in data, else default to 5
+            const refundDays = (selectedBrandData.refund_days !== undefined) ? selectedBrandData.refund_days : 5;
+            const estimatedRefund = addBusinessDays(new Date(), refundDays);
+
+            // 4. Render Results
+            renderDashboard(daysLeft, deadlineDate, estimatedRefund, category, isLifetime, isFinalSale, limitDays, purchaseDate);
+        });
+    }
 
     function renderDashboard(daysLeft, deadline, refundDate, category, isLifetime, isFinalSale, totalDays, purchaseDate) {
         resultBox.style.display = 'block';
@@ -269,9 +289,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // D. Progress Bar
         updateProgressBar(daysLeft, totalDays);
 
-        // E. Link Button
+        // E. Link Button (FIXED: Strict Path Logic)
         if (selectedBrandData.slug) {
-            viewPolicyBtn.href = normalizePolicyPath(selectedBrandData.slug);
+            const correctPath = normalizePolicyPath(selectedBrandData.slug);
+            viewPolicyBtn.href = correctPath;
             viewPolicyBtn.style.display = 'flex';
             viewPolicyBtn.innerHTML = `View Full ${selectedBrandData.name} Policy <i class="fa-solid fa-arrow-right"></i>`;
         } else {
@@ -285,6 +306,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Helpers ---
 
     function updateProgressBar(daysLeft, totalDays) {
+        if (!resProgressBar) return;
+
         if (typeof daysLeft !== 'number') {
             resProgressBar.style.width = '100%';
             resProgressBar.className = 'progress-bar progress-safe';
@@ -298,7 +321,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const elapsed = Math.max(0, totalDays - daysLeft);
-        const percent = Math.min(100, Math.round((elapsed / totalDays) * 100));
+        let percent = 100;
+        
+        if (totalDays > 0) {
+            percent = Math.min(100, Math.round((elapsed / totalDays) * 100));
+        }
         
         resProgressBar.style.width = `${percent}%`;
         
@@ -334,28 +361,75 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${d} Days`;
     }
 
+    /**
+     * FIXED: Normalize Path to ensure 404s do not happen.
+     * Always forces 'stores/' prefix and '.html' extension.
+     */
     function normalizePolicyPath(slug) {
         if (!slug) return '#';
-        const normalized = slug.startsWith('stores/') ? slug : `stores/${slug}`;
-        return normalized.endsWith('.html') ? normalized : `${normalized}.html`;
+        
+        // 1. Remove existing extension to start clean
+        let cleanSlug = slug.replace('.html', '');
+        
+        // 2. Remove 'stores/' prefix if present to start clean
+        cleanSlug = cleanSlug.replace('stores/', '');
+        
+        // 3. Rebuild consistent path
+        return `stores/${cleanSlug}.html`;
     }
 
-    // Render Bottom Grid
+    // Render Bottom Grid (FIXED: Complete Icon Mapping)
     function renderRetailerGrid(data) {
         if (!retailerGrid) return;
+        
+        // Comprehensive Icon Map to fix disappeared logos
+        const iconMap = {
+            amazon: 'fa-brands fa-amazon',
+            walmart: 'fa-solid fa-star', // Walmart often uses spark/star
+            target: 'fa-solid fa-bullseye',
+            costco: 'fa-solid fa-warehouse', // or fa-cart-shopping
+            ebay: 'fa-brands fa-ebay',
+            apple: 'fa-brands fa-apple',
+            bestbuy: 'fa-solid fa-tag',
+            homedepot: 'fa-solid fa-hammer',
+            lowes: 'fa-solid fa-paint-roller',
+            nike: 'fa-brands fa-nike', // If free version supports it, otherwise fa-person-running
+            lululemon: 'fa-solid fa-spa',
+            sephora: 'fa-solid fa-wand-magic-sparkles',
+            ultabeauty: 'fa-solid fa-brush',
+            petco: 'fa-solid fa-dog',
+            chewy: 'fa-solid fa-paw',
+            zara: 'fa-solid fa-shirt',
+            hm: 'fa-solid fa-vest',
+            shein: 'fa-solid fa-bag-shopping',
+            gap: 'fa-solid fa-layer-group',
+            macys: 'fa-solid fa-star',
+            nordstrom: 'fa-solid fa-shoe-prints',
+            wayfair: 'fa-solid fa-couch',
+            ikea: 'fa-solid fa-screwdriver-wrench',
+            tjmaxx: 'fa-solid fa-tags',
+            kohls: 'fa-solid fa-store'
+        };
+
         retailerGrid.innerHTML = '';
         data.forEach(brand => {
             const a = document.createElement('a');
             a.className = 'mini-card';
+            
+            // Use strict path normalizer
             a.href = normalizePolicyPath(brand.slug);
             
-            // Simple Icon Logic (You can expand this map)
-            let iconClass = 'fa-solid fa-store';
-            if (brand.id === 'amazon') iconClass = 'fa-brands fa-amazon';
-            if (brand.id === 'apple') iconClass = 'fa-brands fa-apple';
-            if (brand.id === 'walmart') iconClass = 'fa-solid fa-star';
-            if (brand.id === 'target') iconClass = 'fa-solid fa-bullseye';
-            if (brand.id === 'costco') iconClass = 'fa-solid fa-cart-shopping';
+            // Get Icon or Fallback
+            let iconClass = iconMap[brand.id];
+            
+            // Fallback if ID doesn't match
+            if (!iconClass) {
+                // Try to guess based on ID strings
+                if (brand.id.includes('pet')) iconClass = 'fa-solid fa-dog';
+                else if (brand.id.includes('beauty') || brand.id.includes('cosmetic')) iconClass = 'fa-solid fa-brush';
+                else if (brand.id.includes('clothing') || brand.id.includes('wear')) iconClass = 'fa-solid fa-shirt';
+                else iconClass = 'fa-solid fa-store';
+            }
             
             a.innerHTML = `<i class="${iconClass}"></i><span>${brand.name}</span>`;
             retailerGrid.appendChild(a);
