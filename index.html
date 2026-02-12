@@ -54,26 +54,31 @@
         <main class="calculator-card" id="calculator">
             <div class="input-group search-group">
                 <label for="brand-search"><i class="fa-solid fa-magnifying-glass"></i> 1. FIND RETAILER</label>
-                <input type="text" id="brand-search" placeholder="Type store name (e.g., Walmart, Nike)...">
-                <button type="button" id="brand-toggle" class="combo-toggle" aria-label="Show all retailers" aria-expanded="false">
+                <div class="input-shell">
+                    <input type="text" id="brand-search" class="field-control" placeholder="Type store name (e.g., Walmart, Nike)...">
+                    <button type="button" id="brand-toggle" class="combo-toggle field-chevron" aria-label="Show all retailers" aria-expanded="false">
                     <i class="fa-solid fa-chevron-down"></i>
-                </button>
+                    </button>
+                </div>
                 <div id="search-suggestions" role="listbox" aria-label="Retailer suggestions"></div>
                 <select id="brand-select" style="display:none;"></select> 
             </div>
 
             <div class="input-group" id="category-group" style="display:none;">
                 <label for="category-select"><i class="fa-solid fa-list"></i> 2. SELECT ITEM CATEGORY</label>
-                <select id="category-select">
-                    <option value="" disabled selected>What did you buy?</option>
-                </select>
+                <div class="input-shell">
+                    <select id="category-select" class="field-control">
+                        <option value="" disabled selected>What did you buy?</option>
+                    </select>
+                    <span class="field-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                </div>
                 <div id="category-info" class="info-box"></div>
                 <small id="category-helper" style="display:block; margin-top:8px; color:#555; font-size:0.9rem; line-height:1.4;"></small>
             </div>
 
             <div class="input-group">
                 <label for="purchase-date"><i class="fa-solid fa-calendar-check"></i> 3. PURCHASE DATE</label>
-                <input type="date" id="purchase-date">
+                <input type="date" id="purchase-date" class="field-control">
             </div>
 
             <button id="calculate-btn" disabled style="opacity: 0.5; cursor: not-allowed;">Check Return Date <i class="fa-solid fa-arrow-right"></i></button>
@@ -108,6 +113,9 @@
                             <div id="res-refund-method" class="info-value">--</div>
                         </div>
                     </div>
+                    <a id="view-policy-btn" class="policy-button" href="#" style="display:none;">
+                        View Full Policy <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </main>

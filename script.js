@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resRefundMethod = document.getElementById('res-refund-method');
     const resProgressBar = document.getElementById('res-progress-bar');
     const resProgressLabel = document.getElementById('res-progress-label');
+    const viewPolicyBtn = document.getElementById('view-policy-btn');
 
     let selectedBrandData = null;
 
@@ -337,18 +338,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const category = selectedBrandData.categories[catIndex];
         const purchaseDate = new Date(dateInput.value);
         const days = category.days;
+        const refundDays = getRefundTimelineDays(selectedBrandData.id);
 
         // 1. Handle Special Cases (Lifetime / Final Sale)
         if (days >= 9999) {
-            displayResult("No Deadline", "Lifetime", category, null, null);
+            displayResult("No Deadline", "Lifetime", category, null, null, refundDays);
             return;
         }
         if (days === 0) {
-            displayResult("No Returns", "Final Sale", category, null, null);
+            displayResult("No Returns", "Final Sale", category, null, null, refundDays);
             return;
         }
         if (days === -1) {
-            displayResult("Varies", "Case-by-Case", category, null, null);
+            displayResult("Varies", "Case-by-Case", category, null, null, refundDays);
             return;
         }
 
@@ -365,35 +367,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const diffTime = deadline - today;
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        displayResult(deadline, diffDays, category, days, purchaseDate);
+        displayResult(deadline, diffDays, category, days, purchaseDate, refundDays);
     }
 
     // ============================================
     // 5. Display Results
     // ============================================
-    function displayResult(deadlineDate, daysLeft, category, totalDays, purchaseDate) {
+    function displayResult(deadlineDate, daysLeft, category, totalDays, purchaseDate, refundDays) {
         resultBox.classList.remove('hidden');
         resultBox.style.display = 'block';
+        applyPolicyLink();
 
         // Remaining Days
         if (typeof daysLeft !== 'number') {
             resDaysMessage.textContent = daysLeft;
-            resDaysMessage.style.color = "#0f172a";
+            resDaysMessage.style.color = "#0071e3";
         } else if (daysLeft < 0) {
             resDaysMessage.textContent = `Closed (${Math.abs(daysLeft)} Days Ago)`;
-            resDaysMessage.style.color = "#ef4444";
+            resDaysMessage.style.color = "#eb5757";
         } else if (daysLeft === 0) {
             resDaysMessage.textContent = "0 Days Left";
-            resDaysMessage.style.color = "#ef4444";
-        } else if (daysLeft <= 3) {
-            resDaysMessage.textContent = `${daysLeft} Days Left`;
-            resDaysMessage.style.color = "#ef4444";
+            resDaysMessage.style.color = "#eb5757";
         } else if (daysLeft <= 7) {
             resDaysMessage.textContent = `${daysLeft} Days Left`;
-            resDaysMessage.style.color = "#f59e0b";
+            resDaysMessage.style.color = "#eb5757";
         } else {
             resDaysMessage.textContent = `${daysLeft} Days Left`;
-            resDaysMessage.style.color = "#16a34a";
+            resDaysMessage.style.color = "#0071e3";
         }
 
         // Final Deadline
@@ -407,19 +407,48 @@ document.addEventListener('DOMContentLoaded', () => {
             resDeadlineDate.textContent = deadlineDate;
         }
 
+        applyHighlight(resDeadlineDate, typeof daysLeft === 'number' && daysLeft <= 7);
+
         // Refund Timeline: today + 5 business days
-        const refundDate = addBusinessDays(new Date(), 5);
-        resRefundDate.textContent = refundDate.toLocaleDateString('en-US', {
+        const refundDate = addBusinessDays(new Date(), refundDays);
+        const refundDateLabel = refundDate.toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
         });
+        resRefundDate.textContent = `If you return today, expect your refund by ${refundDateLabel}`;
+        applyHighlight(resRefundDate, false);
 
         // Policy & Method
         resPolicyName.textContent = `${category.name} (${formatDays(category.days)})`;
         resRefundMethod.textContent = selectedBrandData.refund_method || "Original Payment";
 
         updateProgressBar(daysLeft, totalDays, purchaseDate);
+    }
+
+    function applyHighlight(element, isUrgent) {
+        if (!element) return;
+        element.classList.remove('highlight-blue', 'highlight-red');
+        element.classList.add(isUrgent ? 'highlight-red' : 'highlight-blue');
+    }
+
+    function getRefundTimelineDays(brandId) {
+        if (typeof REFUND_TIMELINES === 'undefined') {
+            return 5;
+        }
+        const value = REFUND_TIMELINES[brandId];
+        return Number.isFinite(value) ? value : 5;
+    }
+
+    function applyPolicyLink() {
+        if (!viewPolicyBtn) return;
+        if (!selectedBrandData || !selectedBrandData.slug) {
+            viewPolicyBtn.style.display = 'none';
+            viewPolicyBtn.removeAttribute('href');
+            return;
+        }
+        viewPolicyBtn.href = `${selectedBrandData.slug}.html`;
+        viewPolicyBtn.style.display = 'inline-flex';
     }
 
     function updateProgressBar(daysLeft, totalDays, purchaseDate) {

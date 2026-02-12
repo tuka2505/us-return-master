@@ -407,3 +407,39 @@ const RETURN_DATA = [
         ]
     }
 ];
+
+// Refund timelines in business days (updated per retailer as needed).
+const REFUND_TIMELINES = {
+    amazon: 5,
+    walmart: 5,
+    target: 5,
+    costco: 5,
+    apple: 5,
+    bestbuy: 5,
+    homedepot: 5,
+    lowes: 5,
+    nike: 5,
+    lululemon: 5,
+    sephora: 5,
+    ultabeauty: 5,
+    nordstrom: 5,
+    macys: 5,
+    tjmaxx: 5,
+    marshalls: 5,
+    homegoods: 5,
+    ikea: 5,
+    ebay: 5,
+    temu: 5,
+    shein: 5,
+    kohls: 5,
+    gap: 5,
+    oldnavy: 5,
+    zara: 5,
+    wayfair: 5,
+    chewy: 5,
+    petco: 5,
+    dicks: 5,
+    cvs: 5,
+    walgreens: 5,
+    ross: 5
+};
