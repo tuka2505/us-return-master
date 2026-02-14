@@ -3,6 +3,341 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/amazon.html",
+      "destination": "/stores/amazon-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/walmart.html",
+      "destination": "/stores/walmart-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/target.html",
+      "destination": "/stores/target-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/costco.html",
+      "destination": "/stores/costco-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/apple.html",
+      "destination": "/stores/apple-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-buy.html",
+      "destination": "/stores/best-buy-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/bestbuy.html",
+      "destination": "/stores/best-buy-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/nike.html",
+      "destination": "/stores/nike-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/shein.html",
+      "destination": "/stores/shein-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/chewy.html",
+      "destination": "/stores/chewy-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/lululemon.html",
+      "destination": "/stores/lululemon-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/sephora.html",
+      "destination": "/stores/sephora-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/nordstrom.html",
+      "destination": "/stores/nordstrom-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/macys.html",
+      "destination": "/stores/macys-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/kohls.html",
+      "destination": "/stores/kohls-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/gap.html",
+      "destination": "/stores/gap-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/old-navy.html",
+      "destination": "/stores/old-navy-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/zara.html",
+      "destination": "/stores/zara-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/hm.html",
+      "destination": "/stores/hm-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/ikea.html",
+      "destination": "/stores/ikea-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/home-depot.html",
+      "destination": "/stores/home-depot-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/lowes.html",
+      "destination": "/stores/lowes-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/wayfair.html",
+      "destination": "/stores/wayfair-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/ebay.html",
+      "destination": "/stores/ebay-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/temu.html",
+      "destination": "/stores/temu-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/cvs.html",
+      "destination": "/stores/cvs-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/walgreens.html",
+      "destination": "/stores/walgreens-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/petco.html",
+      "destination": "/stores/petco-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/dicks.html",
+      "destination": "/stores/dicks-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/tj-maxx.html",
+      "destination": "/stores/tj-maxx-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/marshalls.html",
+      "destination": "/stores/marshalls-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/homegoods.html",
+      "destination": "/stores/homegoods-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/ross.html",
+      "destination": "/stores/ross-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/ulta-beauty.html",
+      "destination": "/stores/ulta-beauty-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/amazon-return-policy.html",
+      "destination": "/stores/amazon-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/walmart-return-policy.html",
+      "destination": "/stores/walmart-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/target-return-policy.html",
+      "destination": "/stores/target-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/costco-return-policy.html",
+      "destination": "/stores/costco-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/apple-return-policy.html",
+      "destination": "/stores/apple-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-buy-return-policy.html",
+      "destination": "/stores/best-buy-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/nike-return-policy.html",
+      "destination": "/stores/nike-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/shein-return-policy.html",
+      "destination": "/stores/shein-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/chewy-return-policy.html",
+      "destination": "/stores/chewy-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/lululemon-return-policy.html",
+      "destination": "/stores/lululemon-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/sephora-return-policy.html",
+      "destination": "/stores/sephora-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/nordstrom-return-policy.html",
+      "destination": "/stores/nordstrom-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/macys-return-policy.html",
+      "destination": "/stores/macys-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/kohls-return-policy.html",
+      "destination": "/stores/kohls-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/gap-return-policy.html",
+      "destination": "/stores/gap-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/old-navy-return-policy.html",
+      "destination": "/stores/old-navy-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/zara-return-policy.html",
+      "destination": "/stores/zara-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/hm-return-policy.html",
+      "destination": "/stores/hm-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/ikea-return-policy.html",
+      "destination": "/stores/ikea-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/home-depot-return-policy.html",
+      "destination": "/stores/home-depot-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/lowes-return-policy.html",
+      "destination": "/stores/lowes-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/wayfair-return-policy.html",
+      "destination": "/stores/wayfair-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/ebay-return-policy.html",
+      "destination": "/stores/ebay-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/temu-return-policy.html",
+      "destination": "/stores/temu-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/cvs-return-policy.html",
+      "destination": "/stores/cvs-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/walgreens-return-policy.html",
+      "destination": "/stores/walgreens-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/petco-return-policy.html",
+      "destination": "/stores/petco-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/dicks-return-policy.html",
+      "destination": "/stores/dicks-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/tj-maxx-return-policy.html",
+      "destination": "/stores/tj-maxx-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/marshalls-return-policy.html",
+      "destination": "/stores/marshalls-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/homegoods-return-policy.html",
+      "destination": "/stores/homegoods-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/ross-return-policy.html",
+      "destination": "/stores/ross-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/ulta-beauty-return-policy.html",
+      "destination": "/stores/ulta-beauty-return-policy.html",
+      "permanent": true
+    },
+    {
       "source": "/apple-return-policy",
       "destination": "/stores/apple-return-policy.html",
       "permanent": true
