@@ -332,12 +332,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         resProgressBar.style.width = `${percent}%`;
         
-        if (daysLeft <= 3) {
-            resProgressBar.className = 'progress-bar progress-urgent'; // Red
-        } else if (daysLeft <= 10) {
-            resProgressBar.className = 'progress-bar progress-caution'; // Orange
+        // Match color scheme with days message
+        if (daysLeft < 0) {
+            resProgressBar.className = 'progress-bar progress-urgent'; // Red (expired)
+        } else if (daysLeft <= 7) {
+            resProgressBar.className = 'progress-bar progress-caution'; // Orange (warning)
         } else {
-            resProgressBar.className = 'progress-bar progress-safe'; // Green
+            resProgressBar.className = 'progress-bar progress-safe'; // Blue (safe)
         }
     }
 

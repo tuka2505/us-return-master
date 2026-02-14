@@ -315,6 +315,18 @@ button#calculate-btn:disabled {
     transition: width 1s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+.progress-safe {
+    background: linear-gradient(90deg, #0071e3, #0060c9);
+}
+
+.progress-caution {
+    background: linear-gradient(90deg, #ff9f0a, #ff8800);
+}
+
+.progress-urgent {
+    background: linear-gradient(90deg, #ff3b30, #d9342a);
+}
+
 .progress-label {
     margin-top: 10px;
     font-size: 0.85rem;
@@ -358,6 +370,18 @@ button#calculate-btn:disabled {
 .text-blue { color: #0071e3; }
 .text-red { color: #eb5757; }
 
+/* Pulse Animation Keyframes */
+@keyframes softPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+    50% {
+        transform: scale(1.01);
+        box-shadow: 0 4px 12px rgba(0, 113, 227, 0.15);
+    }
+}
+
 /* Policy Button (Apple-style Soft CTA) */
 .policy-button {
     display: inline-block;
@@ -371,13 +395,15 @@ button#calculate-btn:disabled {
     text-align: center;
     border-radius: 14px;
     box-sizing: border-box;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(0, 0, 0, 0.08);
+    animation: softPulse 3s ease-in-out infinite;
 }
 
 .policy-button:hover {
     background-color: #e8e8ed;
     transform: translateY(-1px);
+    animation: none;
 }
 
 /* --- Guides & Grid --- */
