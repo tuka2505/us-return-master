@@ -285,6 +285,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // C. Policy & Method
         resPolicyName.textContent = `${category.name}`;
         resRefundMethod.textContent = selectedBrandData.refund_method || "Original Payment";
+        
+        // Clear "Calculation pending..." text
+        resProgressLabel.textContent = "";
 
         // D. Progress Bar
         updateProgressBar(daysLeft, totalDays);
