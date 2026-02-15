@@ -25,9 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Result Elements
     const resDaysMessage = document.getElementById('res-days-message');
     const resDeadlineDate = document.getElementById('res-deadline-date');
-    const resRefundDate = document.getElementById('res-refund-date');
+    const resRefundRange = document.getElementById('res-refund-range');
+    const resRefundDisclaimer = document.getElementById('res-refund-disclaimer');
+    const mailExtraDays = document.getElementById('mail-extra-days');
     const resPolicyName = document.getElementById('res-policy-name');
-    const resRefundMethod = document.getElementById('res-refund-method');
     const resProgressBar = document.getElementById('res-progress-bar');
     const resProgressLabel = document.getElementById('res-progress-label');
     const viewPolicyBtn = document.getElementById('view-policy-btn');
@@ -242,17 +243,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             }
 
-            // 3. Calculate Refund Date (Business Days)
-            // Check if refund_days exists in data, else default to 5
-            const refundDays = (selectedBrandData.refund_days !== undefined) ? selectedBrandData.refund_days : 5;
-            const estimatedRefund = addBusinessDays(new Date(), refundDays);
+            // 3. Calculate Refund Date Range (Based on "If Returned Today")
+            const today = new Date();
+            const brandId = selectedBrandData.id;
+            
+            // Get refund data for this brand
+            let refundInfo = { minDays: 3, maxDays: 7 }; // Default fallback
+            let mailExtraDaysValue = 7; // Default extra days for mail
+            
+            if (typeof brandRefundData !== 'undefined' && brandRefundData[brandId]) {
+                refundInfo = brandRefundData[brandId].inStore;
+                // Calculate average extra days for mail
+                const mailMin = brandRefundData[brandId].byMail.minDays;
+                const mailMax = brandRefundData[brandId].byMail.maxDays;
+                mailExtraDaysValue = Math.round((mailMin + mailMax) / 2) - Math.round((refundInfo.minDays + refundInfo.maxDays) / 2);
+            }
+            
+            const refundMinDate = addBusinessDays(today, refundInfo.minDays);
+            const refundMaxDate = addBusinessDays(today, refundInfo.maxDays);
 
             // 4. Render Results
-            renderDashboard(daysLeft, deadlineDate, estimatedRefund, category, isLifetime, isFinalSale, limitDays, purchaseDate);
+            renderDashboard(daysLeft, deadlineDate, refundMinDate, refundMaxDate, mailExtraDaysValue, category, isLifetime, isFinalSale, limitDays, purchaseDate);
         });
     }
 
-    function renderDashboard(daysLeft, deadline, refundDate, category, isLifetime, isFinalSale, totalDays, purchaseDate) {
+    function renderDashboard(daysLeft, deadline, refundMinDate, refundMaxDate, mailExtraDaysValue, category, isLifetime, isFinalSale, totalDays, purchaseDate) {
         resultBox.style.display = 'block';
         resultBox.classList.remove('hidden');
 
@@ -279,20 +294,28 @@ document.addEventListener('DOMContentLoaded', () => {
             resDeadlineDate.textContent = formatDate(deadline);
         }
 
-        // B. Refund Date
-        resRefundDate.textContent = formatDate(refundDate);
+        // B. Refund Date Range (New Wide Section)
+        if (resRefundRange && refundMinDate && refundMaxDate) {
+            const minFormatted = formatDateShort(refundMinDate);
+            const maxFormatted = formatDateShort(refundMaxDate);
+            resRefundRange.textContent = `${minFormatted} - ${maxFormatted}`;
+        }
         
-        // C. Policy & Method
+        // C. Update mail extra days disclaimer
+        if (mailExtraDays) {
+            mailExtraDays.textContent = mailExtraDaysValue;
+        }
+        
+        // D. Policy Name
         resPolicyName.textContent = `${category.name}`;
-        resRefundMethod.textContent = selectedBrandData.refund_method || "Original Payment";
         
         // Clear "Calculation pending..." text
         resProgressLabel.textContent = "";
 
-        // D. Progress Bar
+        // E. Progress Bar
         updateProgressBar(daysLeft, totalDays);
 
-        // E. Link Button (FIXED: Strict Path Logic)
+        // F. Link Button (FIXED: Strict Path Logic)
         if (selectedBrandData.slug) {
             const correctPath = normalizePolicyPath(selectedBrandData.slug);
             viewPolicyBtn.href = correctPath;
@@ -357,6 +380,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function formatDate(dateObj) {
         return dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+    
+    function formatDateShort(dateObj) {
+        return dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     }
 
     function formatDays(d) {

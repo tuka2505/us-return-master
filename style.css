@@ -370,6 +370,50 @@ button#calculate-btn:disabled {
 .text-blue { color: #0071e3; }
 .text-red { color: #eb5757; }
 
+/* Wide Refund Section (New Premium Card) */
+.refund-section-wide {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 1px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.refund-hero {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 32px 28px;
+    text-align: center;
+}
+
+.refund-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    letter-spacing: 0.06em;
+}
+
+.refund-value {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #0071e3;
+    line-height: 1.1;
+    margin-bottom: 14px;
+}
+
+.refund-disclaimer {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.refund-disclaimer span {
+    font-weight: 600;
+    color: var(--primary);
+}
+
 /* Premium Breathing Shadow Animation 2.0 */
 @keyframes breathingShadow {
     0%, 100% {
@@ -563,6 +607,8 @@ footer p { font-size: 0.82rem; color: #a1a1a6; margin-top: 14px; }
     .result-info-grid { grid-template-columns: 1fr; }
     .result-hero-value,
     #res-days-message { font-size: 3rem; }
+    .refund-value { font-size: 2rem; }
+    .refund-hero { padding: 24px 20px; }
 }
 
 .expert-insights {
