@@ -3,6 +3,21 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/(apple|nike|walmart|target|costco|cvs|best-buy|ebay|gap|hm|kohls|lowes|lululemon|macys|marshalls|nordstrom|petco|ross|sephora|shein|temu|walgreens|wayfair|zara|amazon|chewy).html",
+      "destination": "/stores/$1-return-policy.html",
+      "permanent": true
+    },
+    {
+      "source": "/(apple|nike|walmart|target|costco|cvs|best-buy|ebay|gap|hm|kohls|lowes|lululemon|macys|marshalls|nordstrom|petco|ross|sephora|shein|temu|walgreens|wayfair|zara|amazon|chewy)-return-policy.html",
+      "destination": "/stores/$1-return-policy.html",
+      "permanent": true
+    },
+    {
       "source": "/amazon.html",
       "destination": "/stores/amazon-return-policy.html",
       "permanent": true
