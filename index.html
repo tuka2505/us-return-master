@@ -140,37 +140,43 @@
             
             <div id="result-display" class="result-box hidden" style="display:none;">
                 <div class="result-widget">
+
                     <div class="result-hero">
-                        <div class="result-hero-label">Remaining Days</div>
+                        <div class="result-status-dot" id="res-status-dot"></div>
+                        <div class="result-hero-label">REMAINING DAYS</div>
                         <div id="res-days-message" class="result-hero-value">--</div>
                     </div>
-                    
+
                     <div class="result-progress">
                         <div class="progress-track">
                             <div id="res-progress-bar" class="progress-bar" style="width: 0%;"></div>
                         </div>
-                        <div id="res-progress-label" class="progress-label">Calculation pending...</div>
+                        <div class="progress-dates">
+                            <span id="res-progress-start"></span>
+                            <span id="res-progress-end"></span>
+                        </div>
+                        <div id="res-progress-label" class="progress-label"></div>
                     </div>
-                    
+
                     <div class="result-info-grid">
                         <div class="info-cell">
-                            <div class="info-label">?�� FINAL DEADLINE</div>
+                            <div class="info-label">FINAL DEADLINE</div>
                             <div id="res-deadline-date" class="info-value text-blue">--</div>
                         </div>
                         <div class="info-cell">
-                            <div class="info-label">�?POLICY TYPE</div>
+                            <div class="info-label">POLICY TYPE</div>
                             <div id="res-policy-name" class="info-value">--</div>
                         </div>
                     </div>
-                    
+
                     <div class="refund-section-wide">
                         <div class="refund-hero">
-                            <div class="refund-label">?�� EXPECTED REFUND</div>
+                            <div class="refund-label">EXPECTED REFUND</div>
                             <div id="res-refund-range" class="refund-value">--</div>
                             <div id="res-refund-disclaimer" class="refund-disclaimer">*Estimate based on in-store return today. Mail-in returns take approx. <span id="mail-extra-days">7</span> additional days.</div>
                         </div>
                     </div>
-                    
+
                     <a id="view-policy-btn" class="policy-button" href="#">
                         View Full Policy Guide <i class="fa-solid fa-arrow-right"></i>
                     </a>

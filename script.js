@@ -309,11 +309,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // D. Policy Name
         resPolicyName.textContent = `${category.name}`;
         
-        // Clear "Calculation pending..." text
-        resProgressLabel.textContent = "";
+        // Status dot color
+        const statusDot = document.getElementById('res-status-dot');
+        if (statusDot) {
+            if (isLifetime) statusDot.className = 'result-status-dot dot-safe';
+            else if (isFinalSale || daysLeft < 0) statusDot.className = 'result-status-dot dot-urgent';
+            else if (typeof daysLeft === 'number' && daysLeft <= 7) statusDot.className = 'result-status-dot dot-caution';
+            else statusDot.className = 'result-status-dot dot-safe';
+        }
 
-        // E. Progress Bar
-        updateProgressBar(daysLeft, totalDays);
+        // E. Progress Bar + Dates
+        updateProgressBar(daysLeft, totalDays, purchaseDate, deadline, isLifetime, isFinalSale);
 
         // F. Link Button (FIXED: Strict Path Logic)
         if (selectedBrandData.slug) {
@@ -331,37 +337,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Helpers ---
 
-    function updateProgressBar(daysLeft, totalDays) {
+    function updateProgressBar(daysLeft, totalDays, purchaseDate, deadline, isLifetime, isFinalSale) {
         if (!resProgressBar) return;
 
-        if (typeof daysLeft !== 'number') {
+        const progressStart = document.getElementById('res-progress-start');
+        const progressEnd = document.getElementById('res-progress-end');
+
+        // Lifetime / Final Sale special cases
+        if (isLifetime) {
             resProgressBar.style.width = '100%';
             resProgressBar.className = 'progress-bar progress-safe';
+            resProgressLabel.textContent = 'No return deadline — return anytime';
+            if (progressStart) progressStart.textContent = '';
+            if (progressEnd) progressEnd.textContent = 'No Deadline';
             return;
         }
-
-        if (daysLeft < 0) {
-            resProgressBar.style.width = '100%';
+        if (isFinalSale) {
+            resProgressBar.style.width = '0%';
             resProgressBar.className = 'progress-bar progress-urgent';
+            resProgressLabel.textContent = 'Final sale — no returns accepted';
+            if (progressStart) progressStart.textContent = '';
+            if (progressEnd) progressEnd.textContent = 'Final Sale';
             return;
         }
 
-        const elapsed = Math.max(0, totalDays - daysLeft);
-        let percent = 100;
-        
-        if (totalDays > 0) {
-            percent = Math.min(100, Math.round((elapsed / totalDays) * 100));
-        }
-        
-        resProgressBar.style.width = `${percent}%`;
-        
-        // Match color scheme with days message
+        // Set date labels
+        if (progressStart && purchaseDate) progressStart.textContent = formatDateShort(purchaseDate);
+        if (progressEnd && deadline) progressEnd.textContent = formatDateShort(deadline);
+
         if (daysLeft < 0) {
-            resProgressBar.className = 'progress-bar progress-urgent'; // Red (expired)
-        } else if (daysLeft <= 7) {
-            resProgressBar.className = 'progress-bar progress-caution'; // Orange (warning)
+            resProgressBar.style.width = '0%';
+            resProgressBar.className = 'progress-bar progress-urgent';
+            resProgressLabel.textContent = `Return window expired ${Math.abs(daysLeft)} day${Math.abs(daysLeft) !== 1 ? 's' : ''} ago`;
+            return;
+        }
+
+        // Remaining percentage (full bar = just bought, empty bar = deadline now)
+        let percent = 100;
+        if (totalDays > 0) {
+            percent = Math.max(0, Math.min(100, Math.round((daysLeft / totalDays) * 100)));
+        }
+
+        resProgressBar.style.width = `${percent}%`;
+
+        if (daysLeft <= 7) {
+            resProgressBar.className = 'progress-bar progress-caution';
+            resProgressLabel.textContent = daysLeft === 0 ? 'Last day to return!' : `Only ${daysLeft} day${daysLeft !== 1 ? 's' : ''} left — act now`;
         } else {
-            resProgressBar.className = 'progress-bar progress-safe'; // Blue (safe)
+            resProgressBar.className = 'progress-bar progress-safe';
+            resProgressLabel.textContent = `${percent}% of return window remaining`;
         }
     }
 

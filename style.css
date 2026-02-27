@@ -249,62 +249,75 @@ button#calculate-btn:disabled {
     margin-left: auto;
     margin-right: auto;
     display: none;
-    animation: resultReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: resultReveal 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes resultReveal {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(22px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0)   scale(1); }
 }
 
 .result-widget {
-    background: rgba(255, 255, 255, 0.78);
+    background: #ffffff;
     border-radius: 28px;
-    box-shadow: var(--shadow-float);
-    border: 1px solid var(--border-soft);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 20px 60px rgba(0,0,0,0.09);
+    border: 1px solid rgba(0,0,0,0.06);
     overflow: hidden;
 }
 
+/* Hero */
 .result-hero {
-    padding: 34px 32px 22px;
+    padding: 36px 32px 20px;
     text-align: center;
+    position: relative;
 }
+
+.result-status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    background: #34c759;
+    box-shadow: 0 0 0 4px rgba(52,199,89,0.18);
+}
+.result-status-dot.dot-safe    { background: #34c759; box-shadow: 0 0 0 4px rgba(52,199,89,0.18); }
+.result-status-dot.dot-caution { background: #ff9f0a; box-shadow: 0 0 0 4px rgba(255,159,10,0.18); }
+.result-status-dot.dot-urgent  { background: #ff3b30; box-shadow: 0 0 0 4px rgba(255,59,48,0.18); }
 
 .result-hero-label {
     text-transform: uppercase;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: var(--text-muted);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 .result-hero-value {
-    font-size: 3.6rem;
+    font-size: 3.8rem;
     font-weight: 800;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
     color: var(--text-main);
-    line-height: 1.05;
+    line-height: 1.0;
 }
 
 #res-days-message {
-    font-size: 3.6rem;
+    font-size: 3.8rem;
     font-weight: 800;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
     color: #1d1d1f;
+    line-height: 1.0;
 }
 
+/* Progress */
 .result-progress {
-    padding: 0 32px 30px;
-    text-align: center;
+    padding: 4px 32px 28px;
 }
 
 .progress-track {
     width: 100%;
-    height: 8px;
-    background: rgba(0, 0, 0, 0.08);
+    height: 7px;
+    background: rgba(0,0,0,0.07);
     border-radius: 999px;
     overflow: hidden;
 }
@@ -312,100 +325,106 @@ button#calculate-btn:disabled {
 .progress-bar {
     height: 100%;
     border-radius: 999px;
-    transition: width 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: width 1.1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    width: 0%;
 }
 
-.progress-safe {
-    background: linear-gradient(90deg, #0071e3, #0060c9);
-}
+.progress-safe    { background: linear-gradient(90deg, #34c759, #30d158); }
+.progress-caution { background: linear-gradient(90deg, #ff9f0a, #ffb340); }
+.progress-urgent  { background: linear-gradient(90deg, #ff3b30, #ff453a); }
 
-.progress-caution {
-    background: linear-gradient(90deg, #ff9f0a, #ff8800);
-}
-
-.progress-urgent {
-    background: linear-gradient(90deg, #ff3b30, #d9342a);
-}
-
-.progress-label {
-    margin-top: 10px;
-    font-size: 0.85rem;
+.progress-dates {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 0.75rem;
     font-weight: 500;
     color: var(--text-muted);
 }
 
-/* Grid Layout for Details */
+.progress-label {
+    margin-top: 6px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-align: center;
+    min-height: 18px;
+}
+
+/* Info Grid */
 .result-info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background: rgba(0, 0, 0, 0.05);
-    gap: 1px;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: 1px solid rgba(0,0,0,0.07);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
 }
 
 .info-cell {
-    background: rgba(255, 255, 255, 0.92);
-    padding: 20px 22px;
+    padding: 20px 24px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    line-height: 1.6;
+    line-height: 1.5;
+}
+
+.info-cell:first-child {
+    border-right: 1px solid rgba(0,0,0,0.07);
 }
 
 .info-label {
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-size: 0.68rem;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.09em;
     color: var(--text-muted);
-    margin-bottom: 6px;
-    letter-spacing: 0.06em;
+    margin-bottom: 5px;
 }
 
 .info-value {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 700;
     color: var(--text-main);
+    letter-spacing: -0.01em;
 }
 
 .text-blue { color: #0071e3; }
-.text-red { color: #eb5757; }
+.text-red  { color: #ff3b30; }
 
-/* Wide Refund Section (New Premium Card) */
+/* Refund Section */
 .refund-section-wide {
-    background: rgba(0, 0, 0, 0.05);
-    padding: 1px;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background: transparent;
 }
 
 .refund-hero {
-    background: rgba(255, 255, 255, 0.92);
-    padding: 32px 28px;
+    background: rgba(0,113,227,0.04);
+    padding: 28px;
     text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
 }
 
 .refund-label {
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-size: 0.68rem;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.09em;
     color: var(--text-muted);
-    margin-bottom: 12px;
-    letter-spacing: 0.06em;
+    margin-bottom: 10px;
 }
 
 .refund-value {
-    font-size: 2.4rem;
+    font-size: 2.5rem;
     font-weight: 800;
     letter-spacing: -0.03em;
     color: #0071e3;
     line-height: 1.1;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 
 .refund-disclaimer {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--text-muted);
-    line-height: 1.5;
-    max-width: 480px;
+    line-height: 1.6;
+    max-width: 400px;
     margin: 0 auto;
 }
 
@@ -605,9 +624,12 @@ footer p { font-size: 0.82rem; color: #a1a1a6; margin-top: 14px; }
     header h1 { font-size: 2.05rem; }
     .calculator-card { padding: 36px 22px; }
     .result-info-grid { grid-template-columns: 1fr; }
+    .info-cell:first-child { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.07); }
+    .result-hero { padding: 28px 22px 16px; }
+    .result-progress { padding: 4px 22px 24px; }
     .result-hero-value,
-    #res-days-message { font-size: 3rem; }
-    .refund-value { font-size: 2rem; }
+    #res-days-message { font-size: 3.2rem; }
+    .refund-value { font-size: 2.1rem; }
     .refund-hero { padding: 24px 20px; }
 }
 
